@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0">
+  <display-name>TextTransformer</display-name>
+  <servlet><servlet-name>ServletTransformer</servlet-name><servlet-class>com.gmail.servlets.ServletTransformer</servlet-class><load-on-startup>1</load-on-startup></servlet>
+  <servlet><servlet-name>ServletClipboarder</servlet-name><servlet-class>com.gmail.servlets.ServletClipboarder</servlet-class><load-on-startup>1</load-on-startup></servlet>
+  <servlet><servlet-name>ServletClickTracerListener</servlet-name><servlet-class>com.gmail.servlets.ServletClickTracerListener</servlet-class><load-on-startup>1</load-on-startup></servlet>
+  <servlet><servlet-name>ServletErrorListener</servlet-name><servlet-class>com.gmail.servlets.ServletErrorListener</servlet-class><load-on-startup>1</load-on-startup></servlet>
+  <servlet><servlet-name>ServletUploadProcessor</servlet-name><servlet-class>com.gmail.servlets.ServletUploadProcessor</servlet-class><load-on-startup>1</load-on-startup></servlet>
+  <servlet><servlet-name>CredentialsServlet</servlet-name><servlet-class>com.gmail.servlets.CredentialsServlet</servlet-class><load-on-startup>1</load-on-startup></servlet>
+  
+  
+      <servlet-mapping>
+        <servlet-name>ServletTransformer</servlet-name>
+        <url-pattern>/transform</url-pattern>
+    </servlet-mapping>
+    
+          <servlet-mapping>
+        <servlet-name>ServletClipboarder</servlet-name>
+        <url-pattern>/copyToClipboard</url-pattern>
+    </servlet-mapping>
+    
+              <servlet-mapping>
+        <servlet-name>ServletClickTracerListener</servlet-name>
+        <url-pattern>/clicked</url-pattern>
+    </servlet-mapping>
+                 
+                 <servlet-mapping>
+        <servlet-name>ServletClickTracerListener</servlet-name>
+        <url-pattern>/goToPage</url-pattern>
+    </servlet-mapping>
+    
+  
+                 <servlet-mapping>
+        <servlet-name>ServletClickTracerListener</servlet-name>
+        <url-pattern>/default</url-pattern>
+    </servlet-mapping>
+    
+                     <servlet-mapping>
+        <servlet-name>ServletUploadProcessor</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+    
+                       <servlet-mapping>
+        <servlet-name>CredentialsServlet</servlet-name>
+        <url-pattern>/credentials</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>CredentialsServlet</servlet-name>
+        <url-pattern>/loginSuccess</url-pattern>
+    </servlet-mapping>
+    
+    
+    
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.xhtml</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.xhtml</welcome-file>
+  </welcome-file-list>
+  
+  <error-page>
+    <error-code>404</error-code>
+    <location>/errorServlet</location>
+</error-page>
+
+  <error-page>
+    <error-code>401</error-code>
+    <location>/errorServlet</location>
+</error-page>
+
+<error-page>
+    <error-code>500</error-code>
+    <location>/errorServlet</location>
+</error-page>
+<error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/default.jsp</location>
+</error-page>
+
+<filter>
+  <filter-name>CorsFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+</filter>
+<filter-mapping>
+  <filter-name>CorsFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+  
+</web-app>
