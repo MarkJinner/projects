@@ -23,13 +23,14 @@ public class ServletTransformer extends BasicServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-		System.out.println("You got GET UpperCaseTransformerRequest");
+		System.out.println("You got GET TransformerRequest");
 
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-		System.out.println("You got POST UpperCaseTransformerRequest");
+		System.out.println("You got POST TransformerRequest");
+		System.out.println(req.getSession().getAttribute("user"));
 		String response = "";
 		if (req.getRequestURI().toString().equals("/transform")) {
 			response = transformer.processRequest(req,super.getInstance());

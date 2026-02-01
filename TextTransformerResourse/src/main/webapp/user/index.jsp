@@ -221,7 +221,9 @@ header {
 	text-align: justify;
 	padding: 30px;
 	overflow-x: hidden;
-}.btn-user {
+}
+
+.btn-user {
 	display: flex; /* Чтобы можно было задавать отступы */
 	padding: 10px 20px;
 	font-family: PT Sans;
@@ -252,14 +254,14 @@ header {
 }
 </style>
 
-<title>LoginPageSample</title>
+<title>User's page</title>
 </head>
 <body>
 	<center>
 
 		<header>
 			<div class="c">
-				<a class="styled-button2" href="http://localhost:8080" id="index">MAIN</a>
+				<a class="styled-button2" href="http://localhost:8080/user/index.jsp" id="index">MAIN</a>
 				<div class="dropdown">
 					<button class="styled-button2 id="menu">SERVICES</button>
 					<div class="dropdown-content">
@@ -267,7 +269,7 @@ header {
 							href="http://localhost:8080/PunctuationMarksRemover.jsp"
 							id="PunctuationMarksRemover">PunctuationMarksRemover</a> <a
 							class="styled-button"
-							href="http://localhost:8080/UpperCaseTransformer.jsp"
+							href="http://localhost:8080/user/UpperCaseTransformer.jsp"
 							id="UpperCaseTransformer">ToUpperCaseTransformer</a> <a
 							class="styled-button"
 							href="http://localhost:8080/LowerCaseTransformer.jsp"
@@ -289,10 +291,23 @@ header {
 					style="float: right; margin-top: 0.5px" ; button
 					onclick="window.location.href = 'http://localhost:8080/ru/index.jsp';"
 					id="ru/index">RU</button>
-														<button class="styled-button"
-					style="float: right; margin-right: 3px; margin-top: 0.5px" ; button
-					onclick="window.location.href = 'http://localhost:8080/login.jsp';"
-					id="login">LOGIN</button>
+
+				<div class="dropdown"
+					style="float: right; margin-right: 3px; margin-top: 0.5px;">
+					<button class="btn-user" style="background-color: none;"
+						id="userMenu">
+						<img src="/images/free-icon-avatar-6386976.png"
+							style="max-width: 16.5px; height: auto;"><%=request.getSession().getAttribute("user")%></button>
+					<div class="dropdown-content" style="margin-top: 1px;tex-align: left;">
+						<a class="styled-button" style="tex-align: left"
+							href="http://localhost:8080/UserProfile.jsp" id="profile">Profile</a>
+						<a class="styled-button"
+							href="http://localhost:8080/UserDownloads.jsp" id="profile">Downloads</a>
+						<a class="styled-button" href="http://localhost:8080/index.jsp"
+							id="logoutButton">Logout</a>
+
+					</div>
+				</div>
 				</a>
 		</header>
 	</center>
@@ -380,7 +395,11 @@ const urlSender = () => {
 	 let buttonId = event.target.id;
 	 let pageTitle = document.title;
   	 let home = 'http://localhost:8080/';
-   	 let clickData = '{action:Transition from page http://localhost:8080/index.jsp to page '+home+buttonId+'.jsp'+'}';
+  		var usrNme = "<%=request.getSession().getAttribute("user")%>";	 	
+    	let usr = usrNme;
+    		let clickData = '{action:Transition from page http://localhost:8080/index.jsp to page '+home+buttonId+'.jsp by user '+usr+'}';		
+
+ 
    	 fetch('http://localhost:8080/goToPage', {
    	
        method: 'POST',
@@ -413,8 +432,11 @@ const urlSender = () => {
  const urlClickerSender = () => {
 	 let buttonId2 = event.target.id;
 	 let pageTitle2 = document.title;
+	 	var usrNme = "<%=request.getSession().getAttribute("user")%>";	 	
+	    let usr = usrNme;
 
-   	 let clickData2 = '{action:Button on page http://localhost:8080/'+pageTitle2+'.jsp clicked: '+buttonId2+'}';
+   	 let clickData2 = '{action:Button on page http://localhost:8080/'+pageTitle2+'.jsp clicked: '+buttonId2+' by user '+usr+'}';
+   	 /* by user'+usrName */
    	 fetch('http://localhost:8080/clicked', {
    	
        method: 'POST',
@@ -463,6 +485,24 @@ const urlSender = () => {
  buttons5.forEach(button => {
  button.addEventListener('click', urlClickerSender);
  });
+ 
+ 
+ document.getElementById('logoutButton').addEventListener('click', function() {
+	 	var usrNme = "<%=request.getSession().getAttribute("user")%>";	 	
+	    const dataToSend = {  usrNme };
+
+	    fetch('http://localhost:8080/logout', { 
+	        method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/json'
+	        },
+	        body: JSON.stringify(dataToSend)
+	    })
+	    .then(response => response.json())
+	    .then(data => console.log('Успех:', data))
+	    .catch(error => console.error('Ошибка:', error));
+	});
+ 
 </script>
 
 

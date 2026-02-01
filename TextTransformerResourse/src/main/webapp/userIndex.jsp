@@ -222,6 +222,36 @@ header {
 	padding: 30px;
 	overflow-x: hidden;
 }
+
+.btn-user {
+	display: flex; /* Чтобы можно было задавать отступы */
+	padding: 10px 20px;
+	font-family: PT Sans;
+	font-weight: normal;
+	z-index: 1;
+	background-color: orange; /* Цвет фона */
+	color: white; /* Цвет текста */
+	border: none; /* Убираем стандартную рамку ссылки */
+	text-align: center;
+	text-decoration: none; /* Убираем подчеркивание */
+	font-size: 16px;
+	cursor: pointer; /* Курсор в виде руки */
+	border-radius: 5px; /* Скругленные углы */
+	justify-content: center; 
+	
+
+}.btn-user img {
+  /* Изображение будет слева */
+  margin-right: 10px; /* Небольшой отступ от текста */
+  justify-content: center; 
+}.btn-user span {
+  /* Текст будет справа */
+}.btn-user:hover {
+	font-family: PT Sans;
+	font-weight: normal;
+	z-index: 1;
+	background-color: lightgrey; /* Цвет при наведении */
+}
 </style>
 
 <title>User's page</title>
@@ -231,7 +261,7 @@ header {
 
 		<header>
 			<div class="c">
-				<a class="styled-button2" href="http://localhost:8080" id="index">MAIN</a>
+				<a class="styled-button2" href="http://localhost:8080/userIndex.jsp" id="index">MAIN</a>
 				<div class="dropdown">
 					<button class="styled-button2 id="menu">SERVICES</button>
 					<div class="dropdown-content">
@@ -256,27 +286,28 @@ header {
 					id="About">ABOUT US</a> <a
 					href="mailto:oi243012@gmail.com?subject=Letter topic&body=Text of the letter"
 					class="styled-button2" id="writeUs">WRITE US</></a>
-				
+
 				<button class="styled-button"
 					style="float: right; margin-top: 0.5px" ; button
 					onclick="window.location.href = 'http://localhost:8080/ru/index.jsp';"
 					id="ru/index">RU</button>
-					
-					<div class="dropdown"style="float: right; margin-right: 3px;margin-top: 0.5px">									
-					<button class="styled-button" id="userMenu"><%=request.getSession().getAttribute("user")%></button>
-					<div class="dropdown-content" style="margin-top: 1px">
-											<a class="styled-button"
-							href="http://localhost:8080/UserProfile.jsp"
-							id="profile">Profile</a>
-							<a class="styled-button"
-							href="http://localhost:8080/UserDownloads.jsp"
-							id="profile">Downloads</a>
-							<a class="styled-button"
-							href="http://localhost:8080/index.jsp"
+
+				<div class="dropdown"
+					style="float: right; margin-right: 3px; margin-top: 0.5px;">
+					<button class="btn-user" style="background-color: none;"
+						id="userMenu">
+						<img src="/images/free-icon-avatar-6386976.png"
+							style="max-width: 16.5px; height: auto;"><%=request.getSession().getAttribute("user")%></button>
+					<div class="dropdown-content" style="margin-top: 1px;tex-align: left;">
+						<a class="styled-button" style="tex-align: left"
+							href="http://localhost:8080/UserProfile.jsp" id="profile">Profile</a>
+						<a class="styled-button"
+							href="http://localhost:8080/UserDownloads.jsp" id="profile">Downloads</a>
+						<a class="styled-button" href="http://localhost:8080/index.jsp"
 							id="profile">Logout</a>
-					
-					</div>									
-					</div>									
+
+					</div>
+				</div>
 				</a>
 		</header>
 	</center>

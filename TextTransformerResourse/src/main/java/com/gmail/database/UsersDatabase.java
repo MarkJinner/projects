@@ -8,10 +8,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import com.gmail.exceptions.InappropriateEmailFormatException;
 import com.gmail.exceptions.InapropriateCredentialsException;
@@ -20,52 +23,107 @@ import com.gmail.exceptions.UsedCredentialException;
 import com.gmail.queryparsers.ParsedCredentials;
 import com.gmail.storage.Storage;
 
+import logdisplayerprovider.LogDisplayProvider;
+
 public class UsersDatabase extends Storage<Email, User> implements Properties, Serializable {
+	private static UsersDatabase instance;
 	private File users = new File("/Users/olegivanov/Desktop/TextTransformerApp/DataBase/users_database");
-	private Map<Email, User> database;
-	private boolean loginUsed;
+	private File usersFolder = new File("/Users/olegivanov/Desktop/TextTransformerApp/DataBase/users/");
+	private volatile Map<Email, User> database;
+	private boolean loginNotUsed = true;
 	private String eMessage = "";
 
 	public UsersDatabase() throws FileNotFoundException, ClassNotFoundException, IOException {
 		database = load();
 	}
-	
-	
 
 	public String geteMessage() {
 		return eMessage;
 	}
 
-
-
 	public void seteMessage(String eMessage) {
 		this.eMessage = eMessage;
 	}
+	
+	
 
+	public static UsersDatabase getInstance() throws FileNotFoundException, ClassNotFoundException, IOException {
+		if (instance == null) {
+			instance = new UsersDatabase();
 
+		}
+		return instance;
+	}
 
-	public static void main(String[] args)
-			throws FileNotFoundException, ClassNotFoundException, IOException, UsedCredentialException,
-			NoSuchUserException, InappropriateEmailFormatException, InapropriateCredentialsException {
+	public synchronized File getUsers() {
+		return users;
+	}
+
+	public synchronized void setUsers(File users) {
+		this.users = users;
+	}
+
+	public File getUsersFolder() {
+		return usersFolder;
+	}
+
+	public void setUsersFolder(File usersFolder) {
+		this.usersFolder = usersFolder;
+	}
+
+	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException,
+			InappropriateEmailFormatException, InapropriateCredentialsException, NoSuchUserException {
 		User user1 = new User();
-		user1.setEmail("me@s.com");
-		user1.setLogin("user1");
-		user1.setPassword("user1Pass");
+//		try {
+//			user1.setEmail("me@s21.com");
+//		} catch (InappropriateEmailFormatException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		user1.setEmail("user11");
+//		user1.setLogin("user11");
+//		user1.setPassword("user1Pass");
 		User user2 = new User("me2@s.com", "user2", "pass2");
 		UsersDatabase base = new UsersDatabase();
+//		base.add(user1);
 //		System.out.println(base);
-		User user3 = new User("me3@s.com", "user3", "pass2");
+		User user3;
+
+		user3 = new User("me333@s.com", "user3334", "pass2");
+//		base.add(user3);
+
+		// TODO Auto-generated catch block
+
 //		base.add(user1);
 //		base.add(user2);
-//		base.add(user3);
+
+		User user4 = new User("me4@s.com", "user4", "pass2");
+		base.add(user4);
+
+		User user5 = new User("me5@s.com", "user4", "pass2");
+		base.add(user5);
+//		System.out.println(base.loginNotUsed("user5"));
+//		User user6 = new User("user7@s.com", "user7", "pass2");
+//		System.out.println(base.loginNotUsed("user818"));
+//		base.add(user6);
 //		base.remove(user2);
 //		base.remove(user3);
 //		base.findByLogin("user21").ifPresentOrElse((s)->System.out.println(s), ()->System.out.println("No such user"));
-		System.out.println(base.checkLogin("21"));
-//		System.out.println(base);
+//		System.out.println(base.checkLogin("21"));
+		System.out.println("Base:"+base);
 //		System.out.println(base.findByEmail("me3@s.com"));
-//		System.out.println(base.findByLogin("user3"));
-//		base.checkCredentials(user1);
+//		System.out.println(base.findByLogin("user891"));
+//		base.checkCredentials(user2);
+//		base.emailNotUsed(new Email("q@q"));
+//		base.emailNotUsed(new Email("user12"));
+		User us = new User();
+		us.setLogin("user1");
+		us.setEmail("user1@gmail.com");
+		us.setPassword("qwer");
+		base.add(us);
+//		System.out.println(base.getUsersFolderPath(us));
+//		System.out.println(base.findByLogin("user1"));
+		
 
 	}
 
@@ -103,31 +161,128 @@ public class UsersDatabase extends Storage<Email, User> implements Properties, S
 	}
 
 	@Override
-	public void add(User user) throws UsedCredentialException, FileNotFoundException, IOException {
-
-		if (database.containsKey(user.getEmail())) {
-			throw new UsedCredentialException("User can't be added. Email already used");
-
-		} else {
-			if (loginUsed(user.getLogin())) {
-				throw new UsedCredentialException("User can't be added. Login already used");
-			} else {
-				database.put(user.getEmail(), user);
-				System.out.println("User added");
-				store();
-
-			}
+	public boolean add(User user) {
+		ParsedCredentials credentials = new ParsedCredentials();
+		user.getEmail().getAddress().ifPresent((s) -> credentials.setEmail(user.getEmail().getAddress().get()));
+		credentials.setLogin(user.getLogin());
+		credentials.setPassword(user.getPassword());
+		try {
+			return this.add(credentials);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UsedCredentialException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InappropriateEmailFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
+		return false;
 
 	}
 
-	private boolean loginUsed(String login) {
-		database.forEach((a, b) -> {
-			if (b.getLogin().equals(login)) {
-				loginUsed = true;
+	@Override
+	public boolean add(ParsedCredentials credentials)
+			throws UsedCredentialException, FileNotFoundException, IOException, InappropriateEmailFormatException {
+		try {
+			if (emailIsCorrect(credentials.getEmail().getAddress().get())) {
+				if (this.emailNotUsed(credentials.getEmail())) {
+					if (this.loginNotUsed(credentials.getLogin())) {
+						this.database.put(credentials.getEmail(), new User(credentials));
+						createUsersFolder(credentials);
+						this.store();
+						try {
+							database = this.load();
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						return true;
+					}
+
+				}
 			}
+
+		} catch (InappropriateEmailFormatException e) {
+			// TODO Auto-generated catch block
+			eMessage = e.getMessage();
+			e.printStackTrace();
+		} catch (InapropriateCredentialsException e) {
+			eMessage = e.getMessage();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			eMessage = e.getMessage();
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			eMessage = e.getMessage();
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
+
+	private void createUsersFolder(ParsedCredentials credentials) {
+		if (!usersFolder.exists()) {
+			usersFolder.mkdirs();
+
+		}
+
+		File userFolder = new File(usersFolder, credentials.getLogin());
+		userFolder.mkdirs();
+		System.out.println("User's folder created");
+//		try {
+//			this.database = load();
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+	}
+
+	private boolean emailNotUsed(Email email) throws InapropriateCredentialsException {
+		if (!this.database.containsKey(email)) {
+			return true;
+		}
+		throw new InapropriateCredentialsException("Email used");
+	}
+
+	private boolean loginNotUsed(String login) throws InapropriateCredentialsException {
+
+		Stream<User> str = database.values().stream();
+		str.forEach((a) -> {
+			if (login.equals(a.getLogin())) {
+				loginNotUsed = false;
+			}
+
 		});
-		return loginUsed;
+
+		if (loginNotUsed == false) {
+			throw new InapropriateCredentialsException("Login used");
+		}
+		return true;
+
+	}
+
+	private boolean emailIsCorrect(String address) throws InappropriateEmailFormatException {
+		if (Email.ifEmailIsproper(address)) {
+			return true;
+		}
+
+		throw new InappropriateEmailFormatException("Email format is wrong");
 	}
 
 	@Override
@@ -184,8 +339,23 @@ public class UsersDatabase extends Storage<Email, User> implements Properties, S
 	public boolean checkCredentials(ParsedCredentials credentials)
 			throws InapropriateCredentialsException, NoSuchUserException {
 		try {
-			User temp = checkLogin(credentials.getLogin()).get();
-			checkPassword(temp, credentials.getPassword());
+			database = load();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			if (credentials.getEmail().getAddress().isPresent()) {
+				this.verifyEmail(credentials.getEmail().getAddress().get());
+			}
+			User temp = verifyLogin(credentials.getLogin()).get();
+			verifyPassword(temp, credentials.getPassword());
 			return true;
 		} catch (InapropriateCredentialsException e) {
 			eMessage = e.getMessage();
@@ -195,19 +365,32 @@ public class UsersDatabase extends Storage<Email, User> implements Properties, S
 			eMessage = e.getMessage();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (InappropriateEmailFormatException e) {
+			eMessage = e.getMessage();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return false;
 
 	}
 
-	public Optional<User> checkLogin(String login) throws InapropriateCredentialsException, NoSuchUserException {
+	public boolean verifyEmail(String address)
+			throws InapropriateCredentialsException, InappropriateEmailFormatException, NoSuchUserException {
+		if (this.findByEmail(address).isPresent()) {
+			return false;
+		}
+		throw new InapropriateCredentialsException("Email already used");
+
+	}
+
+	public Optional<User> verifyLogin(String login) throws InapropriateCredentialsException, NoSuchUserException {
 		if (findByLogin(login).isPresent()) {
 			return Optional.ofNullable(findByLogin(login).get());
 		}
 		throw new InapropriateCredentialsException("Login incorrect");
 	}
 
-	public boolean checkPassword(User user, String password) throws InapropriateCredentialsException {
+	public boolean verifyPassword(User user, String password) throws InapropriateCredentialsException {
 		if (user.getPassword().equals(password)) {
 			return true;
 		}
@@ -215,19 +398,25 @@ public class UsersDatabase extends Storage<Email, User> implements Properties, S
 
 	}
 
-	public boolean checkCredentials(User user) throws InapropriateCredentialsException, NoSuchUserException {
-		if (findByLogin(user.getLogin()).isPresent()) {
-			System.out.println("Login found");
-			User temp = findByLogin(user.getLogin()).get();
-			if (temp.getPassword().equals(user.getPassword())) {
-				System.out.println("Password correct");
-				return true;
-			} else {
-				throw new InapropriateCredentialsException("Password incorrect");
+	public boolean checkCredentials(User user)
+			throws InapropriateCredentialsException, NoSuchUserException, InappropriateEmailFormatException {
+		ParsedCredentials crds = new ParsedCredentials();
+		crds.setEmail(user.getEmail().getAddress().get());
+		crds.setLogin(user.getLogin());
+		crds.setPassword(user.getPassword());
+		return this.checkCredentials(crds);
+	}
+	
+	public Optional<Path> getUsersFolderPath(User user) throws InapropriateCredentialsException, NoSuchUserException, InappropriateEmailFormatException {
+		if(this.usersFolder.isDirectory()) {
+			File [] files = usersFolder.listFiles();
+			for(File i: files) {
+				if((i.getName().equals(user.getLogin()))) {
+					return Optional.ofNullable(Paths.get(usersFolder.getAbsolutePath()+"/"+user.getLogin()));		
+				}
 			}
-		} else {
-			throw new InapropriateCredentialsException("Login incorrect");
 		}
+		throw new  NoSuchUserException("No such user's folder in users folder");
 	}
 
 }

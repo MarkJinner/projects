@@ -18,6 +18,7 @@ import com.gmail.queryparsers.ParsedFile;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import logdisplayerprovider.LogDisplayProvider;
 
@@ -183,6 +184,12 @@ public class UploadedFileProcessor extends QueryProcessor {
 		}
 
 		return x;
+	}
+
+	@Override
+	public void processRequest(HttpServletRequest req, HttpServletResponse resp, LogDisplayProvider provider) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Operation not supported");
 	}
 
 }

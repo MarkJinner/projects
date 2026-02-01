@@ -1,9 +1,9 @@
 package com.gmail.database;
 
 import java.io.Serializable;
-import java.util.Optional;
 
 import com.gmail.exceptions.InappropriateEmailFormatException;
+import com.gmail.queryparsers.ParsedCredentials;
 
 public class User implements Serializable{
 	private Email email;
@@ -16,7 +16,13 @@ public class User implements Serializable{
 		this.password = password;
 	}
 	
-	public User(String emailAddress, String login, String password) throws InappropriateEmailFormatException {
+	public User(ParsedCredentials credentials) {
+		this.email = credentials.getEmail();
+		this.login = credentials.getLogin();
+		this.password = credentials.getPassword();
+	}
+	
+	public User(String emailAddress, String login, String password) {
 		this.email = new Email();
 		this.email.setAddress(emailAddress);
 		this.login = login;
@@ -33,7 +39,7 @@ public class User implements Serializable{
 
 	}
 
-	public static void main(String[] args) throws InappropriateEmailFormatException {
+	public static void main(String[] args)  {
 		User test = new User();
 		test.setEmail("qw@qwee.com");
 
@@ -43,7 +49,7 @@ public class User implements Serializable{
 		return email;
 	}
 
-	public void setEmail(String address) throws InappropriateEmailFormatException {
+	public void setEmail(String address) {
 		this.email = new Email();
 		this.email.setAddress(address);
 	}

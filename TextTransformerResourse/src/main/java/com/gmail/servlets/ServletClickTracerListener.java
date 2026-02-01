@@ -17,11 +17,16 @@ public class ServletClickTracerListener extends BasicServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
+//		if(req.getRequestURI().equals("/goToPage")) {
+//			processor.processRequest(req, super.getInstance());
+//		}else if(req.getRequestURI().equals("/clicked")) {
+//			processor.processRequest(req, super.getInstance());
+//		}
 		if(req.getRequestURI().equals("/goToPage")) {
-			processor.processRequest(req, super.getInstance());
-		}else if(req.getRequestURI().equals("/clicked")) {
-			processor.processRequest(req, super.getInstance());
-		}
+		processor.processRequest(req, super.getInstance());
+	}else if(req.getRequestURI().equals("/clicked")) {
+		processor.processRequest(req, super.getInstance());
+	}
 		
 		
 	}

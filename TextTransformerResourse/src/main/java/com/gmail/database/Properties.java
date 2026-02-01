@@ -12,7 +12,9 @@ import com.gmail.queryparsers.ParsedCredentials;
 
 public interface Properties {
 
-	public void add(User user) throws UsedCredentialException, FileNotFoundException, IOException;
+	public boolean add(User user) throws UsedCredentialException, FileNotFoundException, IOException, InappropriateEmailFormatException;
+	
+	public boolean add(ParsedCredentials credentials) throws UsedCredentialException, FileNotFoundException, IOException, InappropriateEmailFormatException;
 
 	public void remove(User user) throws FileNotFoundException, IOException, NoSuchUserException;
 

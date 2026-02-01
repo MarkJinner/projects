@@ -4,10 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import com.gmail.exceptions.InappropriateEmailFormatException;
 
-public class Email implements Serializable{
+public class Email implements Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(address);
@@ -36,35 +37,42 @@ public class Email implements Serializable{
 
 	}
 
-	public String getAddress() {
-		return address;
+	public Optional<String> getAddress() {
+		return Optional.ofNullable(address);
 	}
 
-	public void setAddress(String address) throws InappropriateEmailFormatException {
+	public void setAddress(String address) {
+
+		this.address = address;
+	}
+
+	public static boolean ifEmailIsproper(String address) {
 		if (address.contains("@")) {
-			if (ifDomainIsProper(address)) {
-				this.address = address;
-				return;
+			if (isDomainProper(address)) {
+				return true;
 			}
 		}
-		throw new InappropriateEmailFormatException("Wrong format of email");
+
+		return false;
 	}
 
-	private boolean ifDomainIsProper(String address) {
+	private static boolean isDomainProper(String address) {
+
 		if (checkEndings(address)) {
 			return true;
 		}
 		return false;
 	}
 
-	private boolean checkEndings(String address) {
-		if (this.domains.contains(this.getDomain(address))) {
+	private static boolean checkEndings(String address) {
+		List<String> domains = new ArrayList<>(List.of("com", "yahoo", "net", "ukr"));
+		if (domains.contains(getDomain(address))) {
 			return true;
 		}
 		return false;
 	}
 
-	private String getDomain(String address) {
+	private static String getDomain(String address) {
 		String res = address.substring(address.lastIndexOf(".") + 1, address.length());
 		return res;
 	}
@@ -77,10 +85,10 @@ public class Email implements Serializable{
 	public static void main(String[] args) throws InappropriateEmailFormatException {
 		Email mail = new Email();
 //		mail.email = "olegYU";
-		mail.setAddress("uouoi@.com");
-		
+//		mail.setAddress("uouoi@gmail.ert");
+
 		Email mail2 = new Email("uouoi@.com");
-		if(mail.equals(mail2)) {
+		if (mail.equals(mail2)) {
 			System.out.println("!");
 		}
 //		System.out.println(mail);

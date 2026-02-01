@@ -61,60 +61,11 @@ public class CredentialsServlet extends BasicServlet {
 	}
 
 
-	public String getRequestBody(HttpServletRequest req) {
-		StringBuilder sb = new StringBuilder();
-		String line = "";
-		try (Reader reader = req.getReader(); BufferedReader bf = new BufferedReader(reader)) {
 
-			while ((line = bf.readLine()) != null) {
-				sb.append(line + System.lineSeparator());
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return sb.toString();
-	}
-
-//	@Note
-//	@Override
-//	protected void doPost(HttpServletRequest request, HttpServletResponse resp) {
-//		System.out.println("You got your POST SPARE CredentialsServlet request");
-////		processor.processRequest(request, getInstance());
-//		String res = getRequestBody(request);
-////		ParsedCredentials credentials = this.parseCredentials(res);
-//		ParsedCredentials credentials = (ParsedCredentials) this.parser.parseQuery(res);
-//		try {
-//			if (users.checkCredentials(credentials)) {
-//				System.out.println("users.checkCredentials passed succesfully");
-//				resp.setStatus(200);
-//				request.getSession().setAttribute("message", "Приветствуем в профиле, " + credentials.getLogin());// it is important to reset again after redirect
-//																											
-//				resp.sendRedirect("loginSuccess.jsp");
-//				request.getSession().setAttribute("message", request.getSession().getAttribute("message"));// it is important to reset again after redirect
-//			} else {
-//															
-//					resp.setStatus(401);
-//					resp.setContentType("json");
-//					resp.getWriter().write("{\"error\": \""+users.geteMessage()+"\"}");// put any text from any error message	
-//
-//			}
-//		} catch (IOException e) {
-//			System.out.println("Error message = "+e.getMessage());
-//			e.printStackTrace();
-//
-//		} catch (InapropriateCredentialsException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (NoSuchUserException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
 	@Note
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse resp) {
-		System.out.println("You got your POST SPARE CredentialsServlet request");
+		System.out.println("You got your CredentialsServlet request");
 		processor.processRequest(request, resp, getInstance());
 	}
 
@@ -123,22 +74,5 @@ public class CredentialsServlet extends BasicServlet {
 		String comment() default " Spare version";
 	}
 
-//	private ParsedCredentials parseCredentials(String reqBody) {
-//		ParsedCredentials crds = new ParsedCredentials();
-//		crds.setLogin(this.getLogin(reqBody));
-//		crds.setPassword(this.getPassword(reqBody));
-//		return crds;
-//
-//	}
-//
-//	private String getLogin(String reqBody) {
-//		String s1 = reqBody.substring(reqBody.indexOf("login") + 7, reqBody.indexOf("password"));
-//		return s1.substring(0, s1.indexOf("------")).strip();
-//	}
-//
-//	private String getPassword(String reqBody) {
-//		String s1 = reqBody.substring(reqBody.indexOf("password") + 10, reqBody.lastIndexOf("------"));
-//		return s1.strip();
-//	}
 
 }

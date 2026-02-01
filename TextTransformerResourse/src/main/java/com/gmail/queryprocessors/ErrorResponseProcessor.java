@@ -8,6 +8,7 @@ import com.gmail.logger.Logger;
 import com.gmail.page.PageBuilder;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import logdisplayerprovider.LogDisplayProvider;
 
 public class ErrorResponseProcessor extends QueryProcessor {
@@ -64,6 +65,11 @@ public class ErrorResponseProcessor extends QueryProcessor {
 			e.printStackTrace();
 		}
 		return sb.toString();
+	}
+
+	@Override
+	public void processRequest(HttpServletRequest req, HttpServletResponse resp, LogDisplayProvider provider) {
+		throw new UnsupportedOperationException("Operation not supported");
 	}
 
 }

@@ -8,6 +8,7 @@ import com.gmail.logger.Logger;
 import com.gmail.queryparsers.GoToPageFormParser;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import logdisplayerprovider.LogDisplayProvider;
 
 public class ClickTracerProcessor extends QueryProcessor {
@@ -39,5 +40,16 @@ public class ClickTracerProcessor extends QueryProcessor {
 
 		return sb.toString();
 	}
+
+	@Override
+	public void processRequest(HttpServletRequest req, HttpServletResponse resp, LogDisplayProvider provider) {
+		String requestBody = getRequestBody(req);
+		loggingMessage = parser.parseQuery(requestBody).getText();
+		logger.log(loggingMessage);
+		provider.getDisplay().displayLog(loggingMessage);
+
+	}
+	
+
 
 }

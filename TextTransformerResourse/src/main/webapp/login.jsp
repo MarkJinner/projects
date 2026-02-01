@@ -17,6 +17,7 @@ header {
 
 .styled-button {
 	/* Стилизация для внешнего вида */
+	
 	display: inline-block; /* Чтобы можно было задавать отступы */
 	padding: 10px 20px;
 	font-family: PT Sans;
@@ -215,11 +216,14 @@ header {
 	padding-bottom: 10px;
 	padding-top: 20px;
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+	justify-content: center;
 }
 
 .placeholder {
 	width: 150px;
 	height: 30px;
+	 /* border-radius: 3px; */
+	 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .forget-button {
@@ -237,6 +241,76 @@ header {
 	background-color: transparent; /* Цвет при наведении */
 	text-decoration: underline;
 }
+
+
+.overlay {
+    /* Hidden by default */
+    display: none; 
+    position: fixed; 
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0,0,0,0.7); /* Black background with opacity */
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: lightblue;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height: 350px;
+    max-width: 350px;
+    position: relative;
+    border-radius: 5px;
+    border-top: 5px solid #ccc;
+    border-left: 5px solid #ccc;
+	border-right: 5px solid #ccc;
+	border-bottom: 5px solid #ccc;
+	padding-bottom: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+form label {
+    display: block;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.form input, form button {
+    width: 300px;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+.form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+
 </style>
 
 <title>Login</title>
@@ -293,29 +367,39 @@ header {
 							id="password" name="password" required>
 					</p>
 					<p>
-						<button type="submit" class="styled-button2 ">Submit</button>
+						<button type="submit" class="styled-button2" style="width:100px;'">Submit</button>
 					<p>
 						<input type="button" class="forget-button" value="Registration"
-							button
-							onclick="window.location.href = 'http://localhost:8080/registration.jsp'">
+							button onclick="openPopup()">
 						<input type="button" class="forget-button"
 							value="Forgot password?" button
-							onclick="window.location.href = 'http://localhost:8080/forgotPssword.jsp'">
+							onclick="window.location.href = 'http://localhost:8080/forgotPassword.jsp'">
 				</form>
 
 				<br>
-				</p>
+				
+	 <div id="popupOverlay" class="overlay">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span> <!-- Close button -->
+            <h2>Registration Form</h2>
+            		<div id="registrationErrorMessage"
+					style="color: red; font-size: 12px; display: none;"></div>
+            <form id="userRegistration"method="post">
+            <!-- <form action="registration" id="userRegistration"method="post"> -->
+				<p><input type="email" class="placeholder" style="width:300px" placeholder="email" id="email" name="email" required></br>
+                <p><input type="login" class="placeholder" style="width:300px" placeholder="login" id="login" name="login" required></br>
+				<p><input type="password" class="placeholder" style="width:300px" placeholder="password" id="password" name="password" required></br>
+                <p>
+                <p><button type="submit" class="styled-button" style="width:100px">Sign Up</button>
+            </form>
+        </div>
+    </div>
+				
 			</div>
 	</div>
 
 	<div class="footer">All rights reserved @byOlegov 2026</div>
 
-	<!-- <form id="myForm">
-    <input type="text" name="name" placeholder="Имя">
-    <input type="passsword" name="passsword" placeholder="passsword">
-    <button type="submit">Отправить</button>
-</form>
-<div id="message"></div> -->
 
 </body>
 <script>
@@ -337,7 +421,7 @@ document.getElementById('credentials').addEventListener('submit', async function
             // Успешный вход: перенаправление или что-то еще
             console.log('Вход успешен!');
             /* alert('Вход успешен!'); */
-            window.location.href = '/userIndex.jsp';
+            window.location.href = '/user/index.jsp';
         } else {
             // Ошибка! Сервер вернул статус не 2xx
             const errorData = await response.json(); // Предполагаем, что сервер возвращает JSON
@@ -361,6 +445,74 @@ document.getElementById('credentials').addEventListener('submit', async function
         console.error('Ошибка сети или сервера:', error);
         errorMessageDiv.textContent = 'Нет соединения с сервером или произошла внутренняя ошибка.';
         errorMessageDiv.style.display = 'block';
+    }
+});
+
+
+var popup = document.getElementById("popupOverlay");
+
+//Function to open the popup
+function openPopup() {
+ popup.style.display = "flex"; // Use "flex" to center content
+}
+
+//Function to close the popup
+function closePopup() {
+ popup.style.display = "none";
+}
+
+//Optional: Close the popup if the user clicks outside of the content
+window.onclick = function(event) {
+ if (event.target == popup) {
+     popup.style.display = "none";
+ }
+}
+
+
+	document.getElementById('userRegistration').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Предотвращаем стандартную отправку формы
+
+    const form2 = event.target;
+    const formData2 = new FormData(form2);
+    const errorMessageDiv2 = document.getElementById('registrationErrorMessage');
+    errorMessageDiv2.style.display = 'none'; // Скрываем сообщение перед новой попыткой
+    /* alert("!"); */
+    try {
+        const response2 = await fetch('/userRegistration', { // Замените на ваш URL API
+            method: 'POST',
+            body: formData2
+        });
+
+        if (response2.ok) {
+            // Успешный вход: перенаправление или что-то еще
+            console.log('Вход успешен!');
+            /* alert('Вход успешен!'); */
+            window.location.href = '/user/index.jsp';
+        } else {
+        	
+            // Ошибка! Сервер вернул статус не 2xx
+            const errorData2 = await response2.json(); // Предполагаем, что сервер возвращает JSON
+            let message2 = 'Произошла ошибка при входе.';
+            /* alert(errorData2); */
+            if (response2.status == 401 || response2.status == 403) {
+            	  /* alert('401'); */
+            	/* console.log('Вход неуспешен!'); */
+                /* message = errorData.message || 'Неверный логин или пароль'; */
+                message2 = errorData2.error || 'Неверный логин или пароль';
+                
+                form2.reset();
+            } else {
+                message2 = errorData2.message || `Ошибка ${response.status}`;
+            }
+
+            errorMessageDiv2.textContent = message2; // Выводим сообщение
+            errorMessageDiv2.style.display = 'block'; // Показываем блок
+        }
+    } catch (error) {
+        // Сетевая ошибка или ошибка сервера до получения ответа
+        console.error('Ошибка сети или сервера:', error);
+        errorMessageDiv2.textContent = 'Нет соединения с сервером или произошла внутренняя ошибка.';
+        errorMessageDiv2.style.display = 'block';
     }
 });
 

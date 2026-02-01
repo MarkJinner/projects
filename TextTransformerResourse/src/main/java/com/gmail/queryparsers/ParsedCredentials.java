@@ -1,6 +1,10 @@
 package com.gmail.queryparsers;
 
+import com.gmail.database.Email;
+import com.gmail.exceptions.InappropriateEmailFormatException;
+
 public class ParsedCredentials extends Parsed {
+	private Email email = new Email();
 	private String login = "";
 	private String password = "";
 
@@ -24,6 +28,14 @@ public class ParsedCredentials extends Parsed {
 		this.password = password;
 	}
 
+	public Email getEmail() {
+		return email;
+	}
+
+	public void setEmail(String address) {
+		this.email.setAddress(address);
+	}
+
 	@Override
 	public String getText() {
 
@@ -38,7 +50,12 @@ public class ParsedCredentials extends Parsed {
 
 	@Override
 	public String toString() {
-		return "Login: " + login + " Password: " + password;
+		if (email.getAddress().isPresent()) {
+			return "Email: " + email.getAddress().get() + " Login: " + login + " Password: " + password;
+		} else {
+			return " Login: " + login + " Password: " + password;
+		}
+
 	}
 
 }
