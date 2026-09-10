@@ -11,7 +11,7 @@ public class Clipboarder {
 	}
 	public static void main(String[] args) {
 		Clipboarder clipper = new Clipboarder();
-		clipper.copyToClipboard("test");
+		clipper.copyToClipboard("test2");
 
 	}
 	
