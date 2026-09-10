@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="main/java"/>
+	<classpathentry kind="lib" path="main/webapp/WEB-INF/lib/jakarta.activation-2.0.1.jar"/>
+	<classpathentry kind="lib" path="main/webapp/WEB-INF/lib/jakarta.mail-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/.m2/repository/jakarta/platform/jakarta.jakartaee-web-api/10.0.0/jakarta.jakartaee-web-api-10.0.0.jar" sourcepath="/Users/olegivanov/.m2/repository/jakarta/platform/jakarta.jakartaee-web-api/10.0.0/jakarta.jakartaee-web-api-10.0.0-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="jakarta.platform"/>
+			<attribute name="maven.artifactId" value="jakarta.jakartaee-web-api"/>
+			<attribute name="maven.version" value="10.0.0"/>
+			<attribute name="maven.scope" value="provided"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/olegivanov/poi-bin-5.2.3/poi-ooxml-5.2.3.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/eclipse-workspace2026/Classwork/jakarta.xml.bind-api-4.0.2.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/eclipse-workspace2026/Classwork/jaxb-api-2.2.3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

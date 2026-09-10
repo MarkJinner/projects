@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/poi-bin-5.2.3/poi-javadoc-5.2.3.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/poi-bin-5.2.3/poi-ooxml-5.2.3.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/poi-bin-5.2.3/poi-ooxml-full-5.2.3.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/poi-bin-5.2.3/poi-ooxml-lite-5.2.3.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/poi-bin-5.2.3/poi-scratchpad-5.2.3.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/annotations-api.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/catalina-ant.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/catalina-ha.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/catalina-ssi.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/catalina-storeconfig.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/catalina-tribes.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/catalina.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/ecj-4.27.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/el-api.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/jakartaee-migration-1.0.9-shaded.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/jasper-el.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/jasper.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/jaspic-api.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-api.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-coyote-ffm.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-coyote.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-dbcp.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-i18n-cs.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-i18n-de.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-i18n-es.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-i18n-fr.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-i18n-ja.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-i18n-ko.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-i18n-pt-BR.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-i18n-ru.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-i18n-zh-CN.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-jdbc.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-jni.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-util-scan.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-util.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/tomcat-websocket.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/websocket-api.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/websocket-client-api.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.36/bin/tomcat-juli.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/.m2/repository/jakarta/platform/jakarta.jakartaee-web-api/10.0.0/jakarta.jakartaee-web-api-10.0.0.jar" sourcepath="/Users/olegivanov/.m2/repository/jakarta/platform/jakarta.jakartaee-web-api/10.0.0/jakarta.jakartaee-web-api-10.0.0-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="jakarta.platform"/>
+			<attribute name="maven.artifactId" value="jakarta.jakartaee-web-api"/>
+			<attribute name="maven.version" value="10.0.0"/>
+			<attribute name="maven.scope" value="provided"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/jakarta.mail-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/jakarta.xml.bind-api-4.0.5.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/jakarta.activation-api-2.1.4.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/jaxb-runtime-4.0.6.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/istack-commons-runtime-4.2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/org.glassfish.jaxb.core-4.0.5.LIFERAY-PATCHED-1.jar"/>
+	<classpathentry kind="lib" path="/Users/olegivanov/apache-tomcat-10.1.46/lib/txw2-4.0.7.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
