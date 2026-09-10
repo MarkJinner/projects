@@ -1,0 +1,5 @@
+{"date":"05 Sep 12:01:18 ","text":"Frame initialized","level":1}
+{"date":"05 Sep 12:01:18 ","text":"Test 1","level":1}
+{"date":"05 Sep 12:01:20 ","text":"Test 2","level":1}
+{"date":"05 Sep 12:01:22 ","text":"Test 3","level":1}
+{"date":"05 Sep 12:01:24 ","text":"Test 4","level":1}
