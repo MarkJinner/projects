@@ -19,7 +19,7 @@ public class EmailParser {
 
 	public Order parseEmail(Email email) {
 
-		if (email.getContent() != null | !email.getContent().isEmpty()) {
+		if (email.getContent() != null || !email.getContent().isEmpty()) {
 			String[] emailLines = email.getContent().split(System.lineSeparator());
 			Arrays.stream(emailLines).forEach(s -> {
 				setEmailFields(emailLines, s);
