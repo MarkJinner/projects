@@ -139,9 +139,58 @@ public class DisplayToJFrame extends JFrame {
 		Thread.sleep(1000);
 		dtj.displayLog("second line request");
 
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		dtj.displayLog("third line request");
-		Thread.sleep(2000);
+		Thread.sleep(1000);
+		dtj.displayLog("fourth line request");
+		
+		Thread.sleep(1000);
+		dtj.displayLog("first line request");
+		Thread.sleep(1000);
+		Thread.sleep(1000);
+		dtj.displayLog("second line request");
+
+		Thread.sleep(1000);
+		dtj.displayLog("third line request");
+		Thread.sleep(1000);
+		dtj.displayLog("fourth line request");		Thread.sleep(1000);
+		dtj.displayLog("first line request");
+		Thread.sleep(1000);
+		Thread.sleep(1000);
+		dtj.displayLog("second line request");
+
+		Thread.sleep(1000);
+		dtj.displayLog("third line request");
+		Thread.sleep(1000);
+		dtj.displayLog("fourth line request");
+		dtj.displayLog("first line request");
+		Thread.sleep(1000);
+		Thread.sleep(1000);
+		dtj.displayLog("second line request");
+
+		Thread.sleep(1000);
+		dtj.displayLog("third line request");
+		Thread.sleep(1000);
+		dtj.displayLog("fourth line request");
+		
+		Thread.sleep(1000);
+		dtj.displayLog("first line request");
+		Thread.sleep(1000);
+		Thread.sleep(1000);
+		dtj.displayLog("second line request");
+
+		Thread.sleep(1000);
+		dtj.displayLog("third line request");
+		Thread.sleep(1000);
+		dtj.displayLog("fourth line request");		Thread.sleep(1000);
+		dtj.displayLog("first line request");
+		Thread.sleep(1000);
+		Thread.sleep(1000);
+		dtj.displayLog("second line request");
+
+		Thread.sleep(1000);
+		dtj.displayLog("third line request");
+		Thread.sleep(1000);
 		dtj.displayLog("fourth line request");
 //		dtj.dispose();
 		

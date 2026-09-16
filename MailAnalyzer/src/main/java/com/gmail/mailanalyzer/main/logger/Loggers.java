@@ -25,7 +25,7 @@ public class Loggers {
 	}
 
 	public List<Logger> getLoggers() throws IOException {
-		List<Logger> loggers = new ArrayList<>(List.of(new MessageLogger(), new ConnectionCheckMessageLogger()));
+		List<Logger> loggers = new ArrayList<>(List.of(new MessageLogger(), new ConnectionCheckMessageLogger(), new ExceptionMessageLogger()));
 		return loggers;
 	}
 

@@ -6,19 +6,21 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import com.gmail.mailanalyzer.main.exceptions.NoMessageTypeException;
+
 public class FrameMessageFormatter {
 	private SimpleDateFormat formatter;
-	private Map<Integer, Message> messagesTypes = new HashMap<>(Map.of(1, new LogMessage(),2, new ConnectionCheckMessage()));
+	private Map<Integer, Message> messagesTypes = new HashMap<>(Map.of(1, new LogMessage(),2, new ConnectionCheckMessage(),3,new ExceptionMessage()));
 	
 	public FrameMessageFormatter() {
 		this.setupFormatter();
 
 	}
 	
-	public Message format(String str, int level) {
+	public Message format(String str, Level level){
 		Message temp = null;
-		if(messagesTypes.containsKey(level)) {
-			temp = messagesTypes.get(level);
+		if(messagesTypes.containsKey(level.getLevel())) {
+			temp = messagesTypes.get(level.getLevel());
 		}
 		
 		if(temp!=null) {
@@ -26,8 +28,6 @@ public class FrameMessageFormatter {
 			temp.setText(str);
 			temp.setLevel(level);
 		}
-		
-//		System.out.println(temp.getClass());
 		return temp;
 	}
 	
@@ -39,9 +39,9 @@ public class FrameMessageFormatter {
 		
 	}
 	
-	public static void main(String [] args) {
+	public static void main(String [] args) throws NoMessageTypeException {
 		FrameMessageFormatter message = new  FrameMessageFormatter();
-		System.out.println(message.format("Hello!",2));
+		System.out.println(message.format("Hello!",Level.Request));
 	}
 
 	public SimpleDateFormat getFormatter() {

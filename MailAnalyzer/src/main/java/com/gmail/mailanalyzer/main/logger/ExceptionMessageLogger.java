@@ -7,19 +7,19 @@ import com.gmail.mailanalyzer.main.jsonconverter.JsonConverter;
 import com.gmail.mailanalyzer.main.observerframe.message.Level;
 import com.gmail.mailanalyzer.main.observerframe.message.Message;
 
-public class MessageLogger implements Logger {
+public class ExceptionMessageLogger implements Logger {
 	private Logger next;
-	private Level level = Level.Request;
+	private Level level = Level.Exception;
 	private Writer writer;
-	private File file = new File("log_messages.txt");
-	private JsonConverter<MessageLogger> converter = new JsonConverter<>();
-	private Loggers loggers;
+	private File file = new File("exception_messages.txt");
+	private JsonConverter<ExceptionMessageLogger> converter = new JsonConverter<>();
+	private Loggers loggers = Loggers.getInstance();
 
-	public MessageLogger() throws IOException {
+	
+	public ExceptionMessageLogger() throws IOException {
 		if (!file.exists()) {
 			file.createNewFile();
 		}
-		loggers = Loggers.getInstance();
 		writer = new Writer(file);
 	}
 
@@ -30,6 +30,7 @@ public class MessageLogger implements Logger {
 
 	@Override
 	public void next(Message message) throws IOException {
+		
 		loggers.getLoggers().stream().forEach(s -> {
 			if (s.getLevel() != this.getLevel()) {
 				
@@ -37,7 +38,7 @@ public class MessageLogger implements Logger {
 				if (next.getLevel() == message.getLevel()) {
 					try {
 						next.log(message);
-						System.out.println("Message passed to another logger and logged");
+						System.out.println(" Message passed to another logger and logged");
 
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -47,6 +48,7 @@ public class MessageLogger implements Logger {
 			}
 
 		});
+		
 
 	}
 
@@ -63,7 +65,7 @@ public class MessageLogger implements Logger {
 	}
 
 	private void logMessage(Message message) throws IOException {
-		String line = converter.toJson(message);
+		String line  = converter.toJson(message);
 		writer.write(line);
 	}
 

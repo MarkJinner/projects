@@ -1,11 +1,11 @@
 package com.gmail.mailanalyzer.main.observerframe.message;
 
-public  class LogMessage extends Message{
+public  class ExceptionMessage extends Message{
 	private String date;
 	private String text;
 	private Level level;
 	
-	public LogMessage() {
+	public ExceptionMessage() {
 		
 	}
 	

@@ -3,7 +3,7 @@ package com.gmail.mailanalyzer.main.observerframe.message;
 public  class ConnectionCheckMessage extends Message{
 	private String date;
 	private String text;
-	private int level;
+	private Level level;
 	
 	public ConnectionCheckMessage() {
 		
@@ -23,7 +23,7 @@ public  class ConnectionCheckMessage extends Message{
 	}
 
 	@Override
-	public int getLevel() {
+	public Level getLevel() {
 		// TODO Auto-generated method stub
 		return level;
 	}
@@ -41,7 +41,7 @@ public  class ConnectionCheckMessage extends Message{
 	}
 
 	@Override
-	public void setLevel(int level) {
+	public void setLevel(Level level) {
 		// TODO Auto-generated method stub
 		this.level = level;
 	}

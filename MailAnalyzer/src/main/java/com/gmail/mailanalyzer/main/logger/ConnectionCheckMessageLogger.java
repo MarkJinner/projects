@@ -4,11 +4,12 @@ import java.io.File;
 import java.io.IOException;
 
 import com.gmail.mailanalyzer.main.jsonconverter.JsonConverter;
+import com.gmail.mailanalyzer.main.observerframe.message.Level;
 import com.gmail.mailanalyzer.main.observerframe.message.Message;
 
 public class ConnectionCheckMessageLogger implements Logger {
 	private Logger next;
-	private int level = 2;
+	private Level level = Level.Connection;
 	private Writer writer;
 	private File file = new File("connection_check_messages.txt");
 	private JsonConverter<ConnectionCheckMessageLogger> converter = new JsonConverter<>();
@@ -23,7 +24,7 @@ public class ConnectionCheckMessageLogger implements Logger {
 	}
 
 	@Override
-	public int getLevel() {
+	public Level getLevel() {
 		return level;
 	}
 

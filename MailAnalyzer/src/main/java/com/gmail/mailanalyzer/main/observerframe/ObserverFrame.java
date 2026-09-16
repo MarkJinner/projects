@@ -4,15 +4,18 @@ import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.text.Caret;
 
+import com.gmail.mailanalyzer.main.exceptions.NoMessageTypeException;
 import com.gmail.mailanalyzer.main.logger.Logger;
 import com.gmail.mailanalyzer.main.logger.MessageLogger;
 import com.gmail.mailanalyzer.main.observerframe.message.FrameMessageFormatter;
+import com.gmail.mailanalyzer.main.observerframe.message.Level;
 import com.gmail.mailanalyzer.main.observerframe.message.Message;
 
 
@@ -35,16 +38,19 @@ public class ObserverFrame {
 
 	public static void main(String[] args) throws InterruptedException, IOException {
 		ObserverFrame frame = ObserverFrame.getInstance();
-		frame.appendText("Test 1",1);
+		frame.appendText("Test 1");
 		Thread.currentThread().sleep(2000);
-		frame.appendText("Test 2",1);
+		frame.appendText("Test 2");
 		Thread.currentThread().sleep(2000);
-		frame.appendText("Test 3", 1);
+		frame.appendText("Test 3");
 		Thread.currentThread().sleep(2000);
-		frame.appendText("Test 4", 1);
+		frame.appendText("Test 4");
+		Thread.currentThread().sleep(2000);
+		frame.appendText("Exception:!!!!!!!");
+		
 	}
 	private void appendFirstLine() throws IOException {
-		this.appendText(this.initMessage,1);
+		this.appendText(this.initMessage);
 	}
 
 	public static ObserverFrame getInstance() {
@@ -76,6 +82,7 @@ public class ObserverFrame {
 		jframe.setSize(600, 300);	
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.addWindowListener(new FrameAdapter());
+		
 		jframe.add(pane);
 	}
 
@@ -93,16 +100,29 @@ public class ObserverFrame {
 		
 	}
 	
-	public void appendText(String str, int level) throws IOException {
-		Message message = formatter.format(str,  level);
+	public void appendText(String str) throws IOException {
+		Level temp = null;
+		if(str.contains("Connection checked")) {
+			temp = Level.Connection;
+		}else if(str.toLowerCase().contains("exception")) {
+			temp = Level.Exception;
+		}else {
+			temp = Level.Request;
+		}
+		
+		Message message = null;
+			message = formatter.format(str,  temp);
+
 		jtextArea.append(message+""+System.lineSeparator());
 		logger.log(message);
+		jtextArea.getCaret().setDot(jtextArea.getText().length());//this allows to drop down to the bottom of the list	
 	}
 
 	private void setupPane() {
 		this.pane.setAutoscrolls(true);
 		this.pane.createVerticalScrollBar();
 	}
+	
 
 	private class FrameAdapter extends WindowAdapter {
 
@@ -128,7 +148,7 @@ public class ObserverFrame {
 		private void start() throws IOException {
 			while (!thread.isInterrupted()) {
 				try {
-					instance.appendText("Connection checked...", 2);
+					instance.appendText("Connection checked...");
 					thread.sleep(5000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block

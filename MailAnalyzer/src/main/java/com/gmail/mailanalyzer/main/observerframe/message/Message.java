@@ -8,13 +8,13 @@ public abstract class Message {
 
 	public abstract String getDate();
 
-	public abstract int getLevel();
+	public abstract Level getLevel();
 	
 	public abstract void setText(String text);
 
 	public abstract void setDate(String date);
 
-	public abstract void setLevel(int level);
+	public abstract void setLevel(Level level);
 	
 	
 	

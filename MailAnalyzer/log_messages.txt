@@ -1,5 +1,311 @@
-{"date":"05 Sep 12:01:18 ","text":"Frame initialized","level":1}
-{"date":"05 Sep 12:01:18 ","text":"Test 1","level":1}
-{"date":"05 Sep 12:01:20 ","text":"Test 2","level":1}
-{"date":"05 Sep 12:01:22 ","text":"Test 3","level":1}
-{"date":"05 Sep 12:01:24 ","text":"Test 4","level":1}
+{"date":"14 Sep 12:21:38 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 12:21:39 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 12:22:02 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 12:23:27 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 12:23:47 ","text":"New email received Order [transactionId\u003dP1618098103, address\u003divan.hlushko.fc@gmail.com, quantity\u003d1, date\u003d16.03.2024, city\u003dKyiv]","level":"Request"}
+{"date":"14 Sep 12:23:51 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 12:24:02 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 12:24:25 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 09:44:47 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 09:44:48 ","text":"Email inbox scanning started","level":"Request"}
+{"date":"14 Sep 09:46:33 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 09:46:34 ","text":"Initial inbox scanning started","level":"Request"}
+{"date":"14 Sep 09:47:06 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 09:48:45 ","text":"New letter arrived to inbox","level":"Request"}
+{"date":"14 Sep 09:49:23 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 09:51:41 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 09:51:42 ","text":"Initial inbox scanning started","level":"Request"}
+{"date":"14 Sep 09:52:12 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 09:57:24 ","text":"New letter received to inbox","level":"Request"}
+{"date":"14 Sep 09:57:57 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 10:00:28 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:00:29 ","text":"Initial inbox scanning started","level":"Request"}
+{"date":"14 Sep 10:01:00 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 10:01:11 ","text":"New letter received to inbox from Oleg Ivanov \u003coleg_ua@n21.com\u003e","level":"Request"}
+{"date":"14 Sep 10:01:37 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 10:01:38 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 10:01:39 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 10:01:42 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 10:01:53 ","text":"New letter received to inbox from Anna from Queens \u003chello@news.iqueens.com\u003e","level":"Request"}
+{"date":"14 Sep 10:02:23 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 10:03:07 ","text":"New letter received to inbox from Oleg Ivanov \u003coleg_ua@n21.com\u003e","level":"Request"}
+{"date":"14 Sep 10:03:38 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 10:06:22 ","text":"New letter received to inbox from Oleg Ivanov \u003coleg_ua@n21.com\u003e","level":"Request"}
+{"date":"14 Sep 10:06:54 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 10:07:49 ","text":"New letter received to inbox from Oleg Ivanov \u003coleg_ua@n21.com\u003e","level":"Request"}
+{"date":"14 Sep 10:08:24 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 10:08:26 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 10:08:27 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 10:08:32 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 10:08:43 ","text":"New letter received to inbox from Anna from Queens \u003chello@news.iqueens.com\u003e","level":"Request"}
+{"date":"14 Sep 10:08:53 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:08:54 ","text":"Initial inbox scanning started","level":"Request"}
+{"date":"14 Sep 10:09:30 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 10:10:04 ","text":"New letter received to inbox from Oleg Ivanov \u003coleg_ua@n21.com\u003e","level":"Request"}
+{"date":"14 Sep 10:10:44 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 10:12:46 ","text":"New letter received to inbox from Oleg Ivanov \u003coleg_ua@n21.com\u003e","level":"Request"}
+{"date":"14 Sep 10:13:31 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 10:15:33 ","text":"New letter received to inbox from Oleg Ivanov \u003coleg_ua@n21.com\u003e","level":"Request"}
+{"date":"14 Sep 10:16:12 ","text":"New order received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 10:16:13 ","text":"New order received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 10:16:15 ","text":"New order received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 10:16:22 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 10:16:32 ","text":"New letter received to inbox from Anna from Queens \u003chello@news.iqueens.com\u003e","level":"Request"}
+{"date":"14 Sep 10:17:17 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 10:17:23 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:17:25 ","text":"Email inbox scanning started","level":"Request"}
+{"date":"14 Sep 10:18:09 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 10:18:20 ","text":"Email inbox scanning started","level":"Request"}
+{"date":"14 Sep 10:19:12 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 10:20:25 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:20:26 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:21:15 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 10:22:11 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:22:12 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:22:27 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:22:29 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:22:58 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:22:59 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:23:53 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:23:55 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:24:29 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:24:30 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:27:15 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:27:16 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:28:13 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:28:14 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:29:09 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:29:11 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:29:21 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:30:24 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:30:25 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:30:48 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:30:49 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:31:00 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:31:16 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:31:17 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:31:56 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:31:58 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:32:09 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:32:10 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:32:35 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:32:37 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:32:50 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:32:51 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:33:23 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:33:35 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:33:36 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:33:47 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:44:15 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:44:20 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:45:25 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:45:26 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:45:51 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:45:52 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:46:14 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:46:15 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:47:24 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 10:47:29 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:47:42 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:48:18 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:49:20 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:49:21 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:49:57 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:50:41 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:51:12 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 10:51:23 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:51:34 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:53:01 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 10:53:02 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:53:34 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:54:52 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 10:55:16 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 11:00:50 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:00:51 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:01:21 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:03:34 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:03:35 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:04:00 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:04:00 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:04:19 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:04:21 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:05:06 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:05:07 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:05:28 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:05:29 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:05:37 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:05:38 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:06:09 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:06:21 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:06:22 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:06:52 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:07:35 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:07:59 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 11:08:06 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:08:16 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:08:45 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:10:23 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:10:45 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 11:10:51 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:11:01 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:11:25 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:13:33 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:13:34 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:13:58 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:14:08 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:14:44 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:14:44 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:22:54 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:22:55 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:23:13 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 11:23:18 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:23:29 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:23:51 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:24:23 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:24:40 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 11:24:45 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:24:55 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:25:18 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:27:07 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:27:33 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 11:27:40 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:27:51 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:27:57 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:27:58 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:29:06 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:29:07 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:29:38 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:30:21 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:30:45 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 11:30:51 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:31:01 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:31:31 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:34:17 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:34:18 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:34:47 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:35:19 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:36:04 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 11:36:17 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:36:28 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:37:25 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:41:29 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:41:30 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:42:20 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:42:55 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:43:34 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 11:43:47 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:43:58 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:45:10 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:45:12 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:46:09 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:48:25 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:49:03 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 11:49:13 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:49:23 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:50:16 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:57:06 ","text":"Frame initialized","level":"Request"}
+{"date":"14 Sep 11:57:07 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:57:36 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:57:46 ","text":"Email scanning started","level":"Request"}
+{"date":"14 Sep 11:58:12 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"14 Sep 11:58:23 ","text":"Email scanning finished","level":"Request"}
+{"date":"14 Sep 11:58:36 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:04:07 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:04:08 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:04:38 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:05:10 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:05:32 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"15 Sep 12:05:38 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:05:49 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:06:24 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:06:25 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:06:55 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:07:27 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:07:53 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"15 Sep 12:07:59 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:08:10 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:08:34 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:08:36 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:09:05 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:09:38 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:10:16 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"15 Sep 12:10:27 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:10:39 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:11:43 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:11:45 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:12:36 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:13:11 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:13:54 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"15 Sep 12:14:01 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:14:12 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:15:07 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:15:26 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:15:29 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:15:56 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:15:58 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:17:07 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:17:41 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:18:06 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"15 Sep 12:18:15 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:18:26 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:19:03 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:20:09 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:20:11 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:20:53 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:22:42 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:23:06 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"15 Sep 12:23:12 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:23:23 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:23:54 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:26:04 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:26:05 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:26:34 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:27:39 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:28:02 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"15 Sep 12:28:08 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:28:19 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:28:47 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:31:23 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:31:25 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:31:53 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:32:04 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:32:27 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"15 Sep 12:32:34 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:32:45 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:33:14 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:48:36 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:48:38 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:51:28 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:51:30 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:51:55 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:51:56 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:53:43 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:53:44 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:54:03 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:54:28 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:54:29 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:56:02 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:56:04 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:56:37 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:56:38 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:57:00 ","text":"Frame initialized","level":"Request"}
+{"date":"15 Sep 12:57:02 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:57:29 ","text":"Email scanning finished","level":"Request"}
+{"date":"15 Sep 12:58:12 ","text":"Email scanning started","level":"Request"}
+{"date":"15 Sep 12:58:35 ","text":"New email received Order [transactionId\u003dnull, address\u003dnull, quantity\u003dnull, date\u003dnull, city\u003dnull]","level":"Request"}
+{"date":"15 Sep 12:58:40 ","text":"Email scanning finished","level":"Request"}
+{"date":"17 Sep 12:24:27 ","text":"Frame initialized","level":"Request"}
+{"date":"17 Sep 12:24:28 ","text":"Test 1","level":"Request"}
+{"date":"17 Sep 12:24:30 ","text":"Test 2","level":"Request"}
+{"date":"17 Sep 12:24:32 ","text":"Test 3","level":"Request"}
+{"date":"17 Sep 12:24:34 ","text":"Test 4","level":"Request"}
+{"date":"17 Sep 12:29:49 ","text":"Frame initialized","level":"Request"}
+{"date":"17 Sep 12:29:49 ","text":"Test 1","level":"Request"}
+{"date":"17 Sep 12:29:51 ","text":"Test 2","level":"Request"}
+{"date":"17 Sep 12:29:53 ","text":"Test 3","level":"Request"}
+{"date":"17 Sep 12:29:55 ","text":"Test 4","level":"Request"}
+{"date":"17 Sep 12:31:00 ","text":"Frame initialized","level":"Request"}
+{"date":"17 Sep 12:31:00 ","text":"Test 1","level":"Request"}
+{"date":"17 Sep 12:31:02 ","text":"Test 2","level":"Request"}
+{"date":"17 Sep 12:31:04 ","text":"Test 3","level":"Request"}
+{"date":"17 Sep 12:31:06 ","text":"Test 4","level":"Request"}
