@@ -2,6 +2,7 @@ package com.gmail.mailanalyzer.main.mailobserver;
 
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+
 @XmlRootElement
 public class Order {
 	private String transactionId;

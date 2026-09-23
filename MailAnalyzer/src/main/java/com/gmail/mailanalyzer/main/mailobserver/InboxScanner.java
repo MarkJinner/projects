@@ -1,12 +1,11 @@
 package com.gmail.mailanalyzer.main.mailobserver;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
 import com.gmail.mailanalyzer.main.observerframe.ObserverFrame;
+import com.gmail.mailanalyzer.main.observerframe.message.ExceptionConverter;
 
 import jakarta.mail.BodyPart;
 import jakarta.mail.Flags;
@@ -23,7 +22,8 @@ import jakarta.mail.search.FlagTerm;
 public class InboxScanner {
 	
 	private Properties props = new Properties();
-	private File properties = new File("properties.properties");
+//	private File properties = new File("properties.properties");
+//	InputStream is = InboxScanner.class.getClassLoader().getResourceAsStream("properties.properties");
 	private SetupProperties readerProperties;
 	private SetupProperties senderProperties;
 	private ResponseSender sender;
@@ -31,14 +31,19 @@ public class InboxScanner {
 	private EmailParser parser = new EmailParser();
 	private ObserverFrame frame = ObserverFrame.getInstance();
 	private int inboxLength = 0;
+	private EmailConnectionChecker connectionChecker;
+	private ExceptionConverter eConverter;
 	
 
 	public InboxScanner() throws FileNotFoundException, IOException {
-		props.load(new FileInputStream(properties));
+//		props.load(new FileInputStream(properties));
+		props.load(InboxScanner.class.getClassLoader().getResourceAsStream("properties.properties"));
+		System.out.println("Props loaded successfully");
 		readerProperties = new ReaderProperties(props);
 		senderProperties = new SenderProperties(props);
 		sender = new ResponseSender(senderProperties);
-
+		connectionChecker = new EmailConnectionChecker(readerProperties, frame);
+		eConverter = new ExceptionConverter();
 	}
 
 	public Properties getProps() {
@@ -49,18 +54,16 @@ public class InboxScanner {
 		this.props = props;
 	}
 
-	private void startScanning() throws InterruptedException {
-		System.out.println(props);
+	private void startScanning() throws IOException{
+
 
 		while (!Thread.currentThread().isInterrupted()) {
 			try {
-				// Создание сессии и подключение к серверу
 				Session emailSession = Session.getDefaultInstance(props);
 				Store store = emailSession.getStore((String) props.get("protocol"));
 				store.connect((String) props.get("imapHost"), (String) props.get("username"),
 						(String) props.get("key"));
 
-				// Открытие папки "Входящие" (INBOX)
 				Folder emailFolder = store.getFolder("INBOX");
 				emailFolder.open(Folder.READ_WRITE);
 
@@ -69,21 +72,24 @@ public class InboxScanner {
 				FlagTerm unreadTerm = new FlagTerm(unreadFlag, false);
 
 				Message[] messages = emailFolder.search(unreadTerm);
-				System.out.println("inboxLength= "+inboxLength+" "+"Messages length = " + messages.length);
 				if (this.inboxLength != messages.length) {
+					
+					if(inboxLength==0) {
+						frame.appendText("Initial inbox scanning started");
+						
+					}else {
+						frame.appendText("New letter received. Inbox scanning started");
+					}
+					InboxPartScanner.ScannerDisplay display = new InboxPartScanner().new ScannerDisplay();
+
 					inboxLength = messages.length;
-					System.out.println("inboxLength= "+inboxLength);
-					frame.appendText("Email scanning started");
-					System.out.println("Not equal: new letter received");
-					System.out.println();
+					
 					if (messages.length > 100) {
 						
 						int messagesLength = messages.length;
 						int parts = 4;
 						int threadSize = messagesLength / parts;
 						Thread[] partScanners = new Thread[4];
-						long startTime = System.currentTimeMillis();
-						System.out.println("inboxLenght before launching thread  "+this.inboxLength);
 						for (int i = 0; i < parts; i++) {
 							
 							int start = i * threadSize;
@@ -97,41 +103,51 @@ public class InboxScanner {
 							partScanners[i] = new Thread(
 									new InboxPartScanner(messages, start, finish));
 							partScanners[i].start();
+							
 						}
+						
+
 
 						for (int i = 0; i < partScanners.length; i++) {
 							partScanners[i].join();
 						}
 
-						long finishTime = System.currentTimeMillis();
-						System.out.println("Check finished in " + (finishTime - startTime) + " ms");
 					} else {
 						Thread thr = new Thread(new InboxScanner().new InboxPartScanner(messages, 0, messages.length));
 						thr.start();
 
 					}
-					frame.appendText("Email scanning finished");
+					
+					display.tr.interrupt();
+					frame.appendText("Email scanning finished: "+messages.length+" unread letters in inbox");
 				} else {
-					System.out.println("Equal");
+					frame.appendText("No new email in inbox");
+					System.out.println("No new email in inbox");
 				}
 				messages = emailFolder.search(unreadTerm);
-				System.out.println("Всего писем в ящике: " + messages.length);
+//				System.out.println("Всего писем в ящике: " + messages.length);
 				emailFolder.close(false);
 				store.close();
 
 			} catch (Exception e) {
 				System.err.println("Ошибка при подключении к почте: " + e.getMessage());
+				frame.appendText(eConverter.convertToString(e));	
 				e.printStackTrace();
 			}
 			System.out.println("Inbox scanned successfully...");
-			Thread.currentThread().sleep(10000);
+			try {
+				Thread.currentThread().sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				frame.appendText(eConverter.convertToString(e));	
+				e.printStackTrace();
+			}
 		}
 
 	}
 
-	public void scanInbox() throws InterruptedException {
+	public void scanInbox() throws InterruptedException, IOException {
 		startScanning();
-//		sender.sendResponse(order);
 
 	}
 
@@ -147,9 +163,10 @@ public class InboxScanner {
 		private int start;
 		private int finish;
 		private Message[] messages;
+
 		
 		{
-			System.out.println("inboxLength = "+inboxLength);
+
 		}
 
 		public InboxPartScanner(Message[] messages, int start, int finish) {
@@ -157,28 +174,21 @@ public class InboxScanner {
 			this.start = start;
 			this.finish = finish;
 		}
+		
+		public InboxPartScanner() {
+			
+		}
+		
+		
 
 		private void scanInboxSection() throws MessagingException, IOException {
-			System.out.println(start + " " + finish);
-
 			for (int i = start; i < finish; i++) {
 				Message message = messages[i];
-				System.out.println(Thread.currentThread().getName() 
-						+ " Message " + i + ": " + message.getFrom()[0] + " " + message.getReceivedDate());
+				System.out.println(message.getFrom()[0]);
 				if (message.getFrom()[0].toString().contains(props.getProperty("notificationEmail").toLowerCase())) {
-//				if (message.getFrom()[0].toString().contains("info@members.netflix.com".toLowerCase())) {
 					message.setFlag(Flags.Flag.SEEN, true);
 					
-//					System.out.println("Yes, it is contains");
-					System.out.println("NOT Updated inboxLength "+inboxLength);
 					inboxLength = inboxLength - 1;
-					System.out.println("Updated inboxLength "+inboxLength);
-//					if (InboxScanner.this.inboxLength > 0) {
-						
-						
-//						System.out.println("Updated inboxLength "+inboxLength);
-//					}
-//						System.out.println("Letter from Oleg received: " + message.getContent().toString());
 					Object content = message.getContent();
 					if (content instanceof String) {
 						System.out.println("Email content is instance of String");
@@ -189,10 +199,22 @@ public class InboxScanner {
 							parseMessageContent(multipart.getBodyPart(j));
 						}
 					}
+					
 					order = parser.parseEmail(email);
+					if(order.getAddress()!=null) {
+						frame.appendText("New email received " + order);	
+					}else {
+						frame.appendText("New email received from "+ message.getFrom()[0]);
+					}
+					
 					sender.sendResponse(order);
-					System.out.println(order);
-					frame.appendText("New email received " + order);
+					if(order.getAddress()!=null) {
+						frame.appendText("Response sent on "+order.getAddress());	
+					}else {
+						frame.appendText("Response sent on "+message.getFrom()[0]);
+					}
+	
+					
 				}
 			}
 			
@@ -205,6 +227,7 @@ public class InboxScanner {
 		public void run() {
 			try {
 				scanInboxSection();
+
 			} catch (MessagingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -251,6 +274,40 @@ public class InboxScanner {
 				return contentId != null && !contentId.trim().isEmpty();
 			}
 			return false;
+		}
+		private class ScannerDisplay implements Runnable{
+			
+			private Thread tr = new Thread(this);
+			
+			public ScannerDisplay() {
+				tr.start();
+			}
+			
+			private void startCheck() {
+				while(!tr.isInterrupted()) {
+				
+				try {
+					frame.appendText("Inbox scanning...");
+					Thread.currentThread().sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					break;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					break;
+				}
+			}
+			}
+
+			@Override
+			public void run() {
+				startCheck();
+				
+			}
+			
+			
 		}
 
 	}

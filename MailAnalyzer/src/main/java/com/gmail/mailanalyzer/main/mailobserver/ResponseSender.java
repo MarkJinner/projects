@@ -40,9 +40,8 @@ public class ResponseSender {
 
 		Message message;
 		try {
-			message = compileMessage(session, "Oleg_ua@n21.com", "Hello");//fix this
+			message = compileMessage(session, "Oleg_ua@n21.com", "Hello");//personalize this
 			Transport.send(message);
-			System.out.println("Letter  succesfully sent!");//fix this
 
 		} catch (MessagingException e) {
 			e.printStackTrace();
@@ -57,11 +56,11 @@ public class ResponseSender {
 			message.setRecipient(RecipientType.TO, new InternetAddress(address));
 		}
 
-		message.setSubject("Test message from Email observer");
+		message.setSubject("Test message from Email observer");//personalize this
 		String htmlString = "<html>"
 
-				+ messageText + "</html>";
-		message.setContent(htmlString, "text/html");
+				+ messageText + "</html>";//personalize this
+		message.setContent(htmlString, "text/html");//personalize this
 		return message;
 	}
 	
@@ -70,7 +69,7 @@ public class ResponseSender {
 		if(address!="") {
 			BodyPart messageBodyPart = new MimeBodyPart();
 			message.setRecipient(RecipientType.TO, new InternetAddress(address));
-			message.setSubject("Test message with content from Email observer");
+			message.setSubject("Test message with content from Email observer");//personalize this 
 			Multipart multipart = new MimeMultipart();
 			multipart.addBodyPart(messageBodyPart);
 			MimeBodyPart attachmentPart = new MimeBodyPart();
