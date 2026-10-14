@@ -36,6 +36,13 @@
 		</dependency>
 
 
+<!-- Source: https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+<dependency>
+    <groupId>org.apache.pdfbox</groupId>
+    <artifactId>pdfbox</artifactId>
+    <version>3.0.8</version>
+    <scope>compile</scope>
+</dependency>
   </dependencies>
   <build>
     <plugins>
@@ -51,6 +58,34 @@
                     </manifest>
                 </archive>
             </configuration>
+        </plugin>
+        
+        
+                <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.6.0</version>
+            <configuration>
+                <descriptorRefs>
+                    <!-- jar-with-dependencies создаст копию архива со всеми либами внутри -->
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+                <archive>
+                    <manifest>
+                        <!-- Укажите ваш главный класс (Main) -->
+                        <mainClass>com.gmail.mailanalyzer.main.Main</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>make-assembly</id>
+                    <phase>package</phase> <!-- Привязываем к фазе package -->
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions>
         </plugin>
     </plugins>
 </build>

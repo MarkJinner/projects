@@ -4,11 +4,11 @@ public enum Resources {
 	RESOURSES_FOLDER("/Users/olegivanov/eclipse-workspace2026/TextTransformerResourse/src/main/webapp/resource"),
 	
 	USERS_FOLDER_ADDRESS(
-			"/Users/olegivanov/eclipse-workspace2026/TextTransformerResourse/src/main/webapp/resource/usersFolder.txt"),
+			"/Users/olegivanov/git/repository3/TextTransformerResourse/src/main/webapp/resource/usersFolder.txt"),
 	
-	USERS_DATABASE("/Users/olegivanov/eclipse-workspace2026/TextTransformerResourse/src/main/webapp/resource/usersDatabase.txt"),
+	USERS_DATABASE("/Users/olegivanov/git/repository3/TextTransformerResourse/src/main/webapp/resource/usersDatabase.txt"),
 	
-	LOG_ADDRESS("/Users/olegivanov/eclipse-workspace2026/TextTransformerResourse/src/main/webapp/resource/logAddress.txt"),
+	LOG_ADDRESS("/Users/olegivanov/git/repository3/TextTransformerResourse/src/main/webapp/resource/logAddress.txt"),
 	
 	EMAIL_SENDER_ADDRESS("/Users/olegivanov/git/projects/TextTransformerResourse/src/main/webapp/resource/EmailSenderPropertiesAddress.txt"),
 	

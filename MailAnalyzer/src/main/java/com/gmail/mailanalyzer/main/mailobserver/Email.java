@@ -1,9 +1,10 @@
 package com.gmail.mailanalyzer.main.mailobserver;
 
 public class Email {
-	private String content;	
+	private String content;
+
 	public Email() {
-		
+
 	}
 
 	public Email(String content) {
@@ -15,19 +16,13 @@ public class Email {
 		return content;
 	}
 
-
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-
-
-
 
 	@Override
 	public String toString() {
 		return "Email [content=" + content + "]";
 	}
-	
-	
+
 }

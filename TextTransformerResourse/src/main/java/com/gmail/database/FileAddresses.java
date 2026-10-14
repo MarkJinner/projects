@@ -16,10 +16,10 @@ public class FileAddresses {
 
 //	 
 	public FileAddresses() throws IOException {
-		usersFolder = new File(readFile("/Users/olegivanov/eclipse-workspace2026/TextTransformerResourse/src/main/webapp/resource/usersFolder.txt"));
+		usersFolder = new File(readFile("/Users/olegivanov/git/repository3/TextTransformerResourse/src/main/webapp/resource/usersFolder.txt"));
 		users_database = new File(readFile(Resources.USERS_DATABASE.toString()));
 //		log_address = new File(readFile(Resources.LOG_ADDRESS.toString()));
-		log_address = new File(readFile("/Users/olegivanov/eclipse-workspace2026/TextTransformerResourse/src/main/webapp/resource/logAddress.txt"));
+		log_address = new File(readFile("/Users/olegivanov/git/repository3/TextTransformerResourse/src/main/webapp/resource/logAddress.txt"));
 		emailSender_properties = new File(readFile(Resources.EMAIL_SENDER_ADDRESS.toString()));
 		host_properties = new File(readFile(Resources.HOST_PROPERTIES_ADDRESS.toString()));
 		site_address = readFile(Resources.SITE_ADDRESS.toString());

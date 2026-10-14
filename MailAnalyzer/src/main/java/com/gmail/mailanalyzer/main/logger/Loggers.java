@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Loggers {
 	public static Loggers instance = null;
-	private List<Logger> loggers;
 
 	private Loggers() {
 
@@ -22,19 +21,17 @@ public class Loggers {
 
 	public static void main(String[] args) throws IOException {
 		Loggers instance = Loggers.getInstance();
+		System.out.println(instance.getLoggers());
 	}
 
 	public List<Logger> getLoggers() throws IOException {
-		List<Logger> loggers = new ArrayList<>(List.of(new MessageLogger(), new ConnectionCheckMessageLogger(), new ExceptionMessageLogger()));
-		return loggers;
+		return new ArrayList<>(List.of(new MessageLogger(), new ConnectionCheckMessageLogger(), new ExceptionMessageLogger()));
 	}
 
 	public static void setInstance(Loggers instance) {
 		Loggers.instance = instance;
 	}
 
-	public void setLoggers(List<Logger> loggers) {
-		this.loggers = loggers;
-	}
+
 
 }

@@ -1,7 +1,5 @@
 package com.gmail.mailanalyzer.main.mailobserver;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.Properties;
 
 public class ReaderProperties extends SetupProperties {
@@ -21,15 +19,6 @@ public class ReaderProperties extends SetupProperties {
 		props.put("mail.imap.ssl.enable", "true");
 	}
 
-
-//	@Override
-//	protected void setProperties() {
-//		props.setProperty("imapHost", (String) props.get("imapHost"));
-//		props.setProperty("portIn", (String) props.get("portIn"));
-//		props.setProperty("username", (String) props.get("username"));
-//		props.setProperty("key", (String) props.get("key"));
-//		props.setProperty("protocol", (String) props.get("protocol"));	
-//	}
 
 	@Override
 	public Properties getProperties() {

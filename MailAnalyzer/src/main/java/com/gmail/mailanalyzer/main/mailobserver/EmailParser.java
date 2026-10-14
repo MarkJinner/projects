@@ -1,64 +1,65 @@
 package com.gmail.mailanalyzer.main.mailobserver;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.gmail.mailanalyzer.main.Test;
+
 public class EmailParser {
-	private Order temp = new Order();
-	private List<String> extentions = new ArrayList<>(List.of("net", "com"));
+	
+	private List<String> domains = List.of("net", "com", "org", "ua");
 
 	public EmailParser() {
 
 	}
 
 	public Order parseEmail(Email email) {
-
+		Order temp = new Order();
 		if (email.getContent() != null || !email.getContent().isEmpty()) {
 			String[] emailLines = email.getContent().split(System.lineSeparator());
 			Arrays.stream(emailLines).forEach(s -> {
-				setEmailFields(emailLines, s);
+				setEmailFields(temp,emailLines, s);
 			});
 
 		}
-
 		return temp;
 	}
 
-	private void setEmailFields(String[] emailLines, String s) {
+	private void setEmailFields(Order temp, String[] emailLines, String s) {
 		if (s.startsWith("Номер замовлення:")) {
 			temp.setTransactionId(s.substring("Номер замовлення: ".length(), s.length()).trim());
 		} else if (s.startsWith("Атрибут2:")) {
 			temp.setAddress(s.substring("Атрибут2: ".length(), s.length()).trim());
 		} else if (s.startsWith("Коментар:")) {
-			parseCommentField(emailLines, s);
+			parseCommentField(temp, emailLines, s);
 		}
 	}
 
-	private void parseCommentField(String[] emailLines, String s) {
-		substringAndSetQuantity(s);
-		String subDate = substringAndSetDate(s);
-		substringAndSetCity(subDate);
-
+	private void parseCommentField(Order temp,String[] emailLines, String s) {
+		setOrderFields(temp, s);
+		
 		if (ifNoEmailField(emailLines)) {
 			if (endsWithEmail(s)) {
-				String addr = parseAddress(s).trim();
-				temp.setAddress(addr);
+				temp.setAddress(parseAddress(s).trim());
 			}
 		}
 	}
 
-	private void substringAndSetCity(String subDate) {
-		String city = subDate.substring(subDate.indexOf(" ") + 1, subDate.length());
+	private void setOrderFields(Order temp, String s) {
+		substringAndSetQuantity(temp, s);
+		substringAndSetDate(temp, s);
+		substringAndSetCity(temp,s);
+	}
+
+	private void substringAndSetCity(Order temp,String s) {
+		String subCity = s.substring(s.indexOf("for the seminar.") + "\"for the seminar.".length(),
+				s.indexOf(". Payer"));
+		String city = subCity.substring(subCity.indexOf(" ") + 1, subCity.length());
 		temp.setCity(city.trim());
 	}
 
-	private String substringAndSetDate(String s) {
+	private String substringAndSetDate(Order temp,String s) {
 		String subDate = s.substring(s.indexOf("for the seminar.") + "\"for the seminar.".length(),
 				s.indexOf(". Payer"));
 		String date = subDate.substring(0, subDate.indexOf(" "));
@@ -66,7 +67,7 @@ public class EmailParser {
 		return subDate;
 	}
 
-	private void substringAndSetQuantity(String s) {
+	private void substringAndSetQuantity(Order temp,String s) {
 		String subQty = s.substring(0, s.indexOf("ticket(s)"));
 		String qty = subQty.substring("Коментар: Payment for ".length(), subQty.lastIndexOf(" "));
 		temp.setQuantity(qty.trim());
@@ -78,11 +79,7 @@ public class EmailParser {
 
 	private boolean endsWithEmail(String line) {
 		String subMail = parseAddress(line);
-		if (subMail.contains("net") || subMail.contains("com")) {
-			return true;
-		}
-
-		return false;
+		return domains.stream().anyMatch(s->subMail.endsWith(s));
 	}
 
 	private String parseAddress(String line) {
@@ -101,8 +98,6 @@ public class EmailParser {
 				}
 			}
 		});
-//		parser.testParseEmail1();
-//		parser.testParseEmail2();
 	}
 
 	@Test
@@ -152,8 +147,3 @@ public class EmailParser {
 
 }
 
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
-@interface Test {
-
-}

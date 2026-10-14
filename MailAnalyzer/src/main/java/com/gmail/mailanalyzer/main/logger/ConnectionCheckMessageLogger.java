@@ -38,8 +38,6 @@ public class ConnectionCheckMessageLogger implements Logger {
 				if (next.getLevel() == message.getLevel()) {
 					try {
 						next.log(message);
-						System.out.println(" Message passed to another logger and logged");
-
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -56,15 +54,14 @@ public class ConnectionCheckMessageLogger implements Logger {
 	public void log(Message message) throws IOException {
 
 		if (message.getLevel() == this.level) {
-			logMessage(message);
-			System.out.println("Message logged in local logger");
+			saveMessage(message);
 		} else {
 			next(message);
 		}
 
 	}
 
-	private void logMessage(Message message) throws IOException {
+	private void saveMessage(Message message) throws IOException {
 		String line  = converter.toJson(message);
 		writer.write(line);
 	}

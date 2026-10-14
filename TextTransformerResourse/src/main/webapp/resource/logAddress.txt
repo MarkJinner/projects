@@ -1,1 +1,1 @@
-/Users/olegivanov/eclipse-workspace2026/TextTransformerResourse/src/main/webapp/log/log
+/Users/olegivanov/git/repository3/TextTransformerResourse/src/main/webapp/log/log

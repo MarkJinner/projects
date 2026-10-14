@@ -1,5 +1,7 @@
 package com.gmail.mailanalyzer.main.mailobserver;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
@@ -20,10 +22,8 @@ import jakarta.mail.internet.MimeMultipart;
 import jakarta.mail.search.FlagTerm;
 
 public class InboxScanner {
-	
+
 	private Properties props = new Properties();
-//	private File properties = new File("properties.properties");
-//	InputStream is = InboxScanner.class.getClassLoader().getResourceAsStream("properties.properties");
 	private SetupProperties readerProperties;
 	private SetupProperties senderProperties;
 	private ResponseSender sender;
@@ -33,12 +33,19 @@ public class InboxScanner {
 	private int inboxLength = 0;
 	private EmailConnectionChecker connectionChecker;
 	private ExceptionConverter eConverter;
-	
 
 	public InboxScanner() throws FileNotFoundException, IOException {
-//		props.load(new FileInputStream(properties));
-		props.load(InboxScanner.class.getClassLoader().getResourceAsStream("properties.properties"));
-		System.out.println("Props loaded successfully");
+//		props.load(InboxScanner.class.getClassLoader().getResourceAsStream("properties.properties"));
+		String currentDir = System.getProperty("user.dir");
+		File configFile = new File(currentDir+File.separator+"mail_properties.properties"); 
+		props.load(new FileInputStream(configFile));
+//		props.load(new FileInputStream(new File("")));
+		if (props.stringPropertyNames().size()!=0) {
+			frame.appendText("Properties loaded successfully");
+		}else {
+			frame.appendText("Properties load failed");
+		}
+
 		readerProperties = new ReaderProperties(props);
 		senderProperties = new SenderProperties(props);
 		sender = new ResponseSender(senderProperties);
@@ -54,16 +61,17 @@ public class InboxScanner {
 		this.props = props;
 	}
 
-	private void startScanning() throws IOException{
-
+	private void startScanning() throws IOException {
 
 		while (!Thread.currentThread().isInterrupted()) {
 			try {
+				
 				Session emailSession = Session.getDefaultInstance(props);
+				
 				Store store = emailSession.getStore((String) props.get("protocol"));
+				
 				store.connect((String) props.get("imapHost"), (String) props.get("username"),
 						(String) props.get("key"));
-
 				Folder emailFolder = store.getFolder("INBOX");
 				emailFolder.open(Folder.READ_WRITE);
 
@@ -73,25 +81,27 @@ public class InboxScanner {
 
 				Message[] messages = emailFolder.search(unreadTerm);
 				if (this.inboxLength != messages.length) {
+
 					
-					if(inboxLength==0) {
+					if (inboxLength == 0) {
 						frame.appendText("Initial inbox scanning started");
-						
-					}else {
+
+					} else {
 						frame.appendText("New letter received. Inbox scanning started");
+
 					}
 					InboxPartScanner.ScannerDisplay display = new InboxPartScanner().new ScannerDisplay();
 
 					inboxLength = messages.length;
-					
+
 					if (messages.length > 100) {
-						
+
 						int messagesLength = messages.length;
 						int parts = 4;
 						int threadSize = messagesLength / parts;
 						Thread[] partScanners = new Thread[4];
 						for (int i = 0; i < parts; i++) {
-							
+
 							int start = i * threadSize;
 							int finish = start + threadSize;
 							if (i == parts - 1) {
@@ -99,14 +109,11 @@ public class InboxScanner {
 									finish = finish + (messages.length - finish);
 								}
 							}
-							
-							partScanners[i] = new Thread(
-									new InboxPartScanner(messages, start, finish));
-							partScanners[i].start();
-							
-						}
-						
 
+							partScanners[i] = new Thread(new InboxPartScanner(messages, start, finish));
+							partScanners[i].start();
+
+						}
 
 						for (int i = 0; i < partScanners.length; i++) {
 							partScanners[i].join();
@@ -117,21 +124,19 @@ public class InboxScanner {
 						thr.start();
 
 					}
-					
+
 					display.tr.interrupt();
-					frame.appendText("Email scanning finished: "+messages.length+" unread letters in inbox");
+					frame.appendText("Email scanning finished: " + messages.length + " unread letters in inbox");
 				} else {
 					frame.appendText("No new email in inbox");
-					System.out.println("No new email in inbox");
 				}
 				messages = emailFolder.search(unreadTerm);
-//				System.out.println("Всего писем в ящике: " + messages.length);
 				emailFolder.close(false);
 				store.close();
 
 			} catch (Exception e) {
 				System.err.println("Ошибка при подключении к почте: " + e.getMessage());
-				frame.appendText(eConverter.convertToString(e));	
+				frame.appendText(eConverter.convertToString(e));
 				e.printStackTrace();
 			}
 			System.out.println("Inbox scanned successfully...");
@@ -139,7 +144,7 @@ public class InboxScanner {
 				Thread.currentThread().sleep(10000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
-				frame.appendText(eConverter.convertToString(e));	
+				frame.appendText(eConverter.convertToString(e));
 				e.printStackTrace();
 			}
 		}
@@ -164,7 +169,6 @@ public class InboxScanner {
 		private int finish;
 		private Message[] messages;
 
-		
 		{
 
 		}
@@ -174,12 +178,10 @@ public class InboxScanner {
 			this.start = start;
 			this.finish = finish;
 		}
-		
+
 		public InboxPartScanner() {
-			
+
 		}
-		
-		
 
 		private void scanInboxSection() throws MessagingException, IOException {
 			for (int i = start; i < finish; i++) {
@@ -187,7 +189,7 @@ public class InboxScanner {
 				System.out.println(message.getFrom()[0]);
 				if (message.getFrom()[0].toString().contains(props.getProperty("notificationEmail").toLowerCase())) {
 					message.setFlag(Flags.Flag.SEEN, true);
-					
+
 					inboxLength = inboxLength - 1;
 					Object content = message.getContent();
 					if (content instanceof String) {
@@ -199,27 +201,26 @@ public class InboxScanner {
 							parseMessageContent(multipart.getBodyPart(j));
 						}
 					}
-					
+
 					order = parser.parseEmail(email);
-					if(order.getAddress()!=null) {
-						frame.appendText("New email received " + order);	
-					}else {
-						frame.appendText("New email received from "+ message.getFrom()[0]);
+					if (order.getAddress() != null) {
+						frame.appendText("New email received " + order);
+					} else {
+						frame.appendText("New email received from " + message.getFrom()[0]);
 					}
-					
+
 					sender.sendResponse(order);
-					if(order.getAddress()!=null) {
-						frame.appendText("Response sent on "+order.getAddress());	
-					}else {
-						frame.appendText("Response sent on "+message.getFrom()[0]);
+					if (order.getAddress() != null) {
+						frame.appendText("Response sent on " + order.getAddress());
+					} else {
+						frame.appendText("Response sent on " + message.getFrom()[0]);
 					}
-	
-					
+
 				}
 			}
-			
+
 			Thread.currentThread().interrupt();
-			System.out.println(Thread.currentThread().getName()+" is interrupting");
+			System.out.println(Thread.currentThread().getName() + " is interrupting");
 
 		}
 
@@ -275,39 +276,39 @@ public class InboxScanner {
 			}
 			return false;
 		}
-		private class ScannerDisplay implements Runnable{
-			
+
+		private class ScannerDisplay implements Runnable {
+
 			private Thread tr = new Thread(this);
-			
+
 			public ScannerDisplay() {
 				tr.start();
 			}
-			
+
 			private void startCheck() {
-				while(!tr.isInterrupted()) {
-				
-				try {
-					frame.appendText("Inbox scanning...");
-					Thread.currentThread().sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					break;
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					break;
+				while (!tr.isInterrupted()) {
+
+					try {
+						frame.appendText("Inbox scanning...");
+						Thread.currentThread().sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						break;
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						break;
+					}
 				}
-			}
 			}
 
 			@Override
 			public void run() {
 				startCheck();
-				
+
 			}
-			
-			
+
 		}
 
 	}

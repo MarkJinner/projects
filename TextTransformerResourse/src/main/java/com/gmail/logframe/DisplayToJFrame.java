@@ -191,9 +191,7 @@ public class DisplayToJFrame extends JFrame {
 		Thread.sleep(1000);
 		dtj.displayLog("third line request");
 		Thread.sleep(1000);
-		dtj.displayLog("fourth line request");
-//		dtj.dispose();
-		
+
 		
 		
 
