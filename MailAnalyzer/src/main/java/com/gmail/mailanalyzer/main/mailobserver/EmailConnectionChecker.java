@@ -90,7 +90,8 @@ public class EmailConnectionChecker implements Runnable{
 				frame.appendText("Email connection failed"+System.lineSeparator()+new ExceptionConverter().convertToString(e));
 				e.printStackTrace();
 			}
-			tr.sleep(30000);		
+			tr.sleep(10000);
+//			tr.sleep(30000);
 		}
 	}
 	

@@ -11,6 +11,10 @@ public class Writer {
 	public Writer(File file) {
 		this.file = file;
 	}
+	
+	public Writer() {
+		
+	}
 
 	public File getFile() {
 		return file;
@@ -26,4 +30,13 @@ public class Writer {
 		}
 		return file;
 	}
+	
+	public File write(String json, File newFile) throws IOException {
+		try (PrintWriter pw = new PrintWriter(new FileWriter(newFile, true))) {
+			pw.print((json+System.lineSeparator()));
+		}
+		return file;
+	}
+	
+	
 }

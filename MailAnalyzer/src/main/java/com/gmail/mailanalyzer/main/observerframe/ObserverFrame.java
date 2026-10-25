@@ -27,7 +27,7 @@ import com.gmail.mailanalyzer.main.observerframe.message.Message;
 public class ObserverFrame {
 	private static ObserverFrame instance = null;
 	private FrameInitializer frameInit = new FrameInitializer();
-	private Logger logger = new MessageLogger();
+	private Logger logger = MessageLogger.getInstance();
 	private Message message = null;
 	private Level messageLevel = null;
 	private Map<String, Level> levels = new TreeMap<>(

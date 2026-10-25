@@ -1,15 +1,37 @@
 package com.gmail.mailanalyzer.main.logger;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Loggers {
 	public static Loggers instance = null;
+	private static File mainFolder;
+	
 
 	private Loggers() {
+		mainFolder = new File("logs");
 
+		if (!mainFolder.exists()) {
+			mainFolder.mkdirs();
+
+		} 
 	}
+	
+	
+
+	public static File getMainFolder() {
+		return mainFolder;
+	}
+
+
+
+	public static void setMainFolder(File mainFolder) {
+		Loggers.mainFolder = mainFolder;
+	}
+
+
 
 	public static Loggers getInstance() {
 		if (instance == null) {
@@ -25,7 +47,7 @@ public class Loggers {
 	}
 
 	public List<Logger> getLoggers() throws IOException {
-		return new ArrayList<>(List.of(new MessageLogger(), new ConnectionCheckMessageLogger(), new ExceptionMessageLogger()));
+		return new ArrayList<>(List.of(MessageLogger.getInstance(), ConnectionLogger.getInstance(), ExceptionLogger.getInstance()));
 	}
 
 	public static void setInstance(Loggers instance) {

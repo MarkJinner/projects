@@ -40,8 +40,7 @@ public class Marker {
 
 	public File mark(File file, String mark, File folder) throws IOException {
 		 File sourceFile = new File(file.getPath());
-		 System.out.println(sourceFile.getParent());
-	        File destFile = new File(folder,"copy_new3.pdf");
+	     File destFile = new File(folder,"copy_new3.pdf");
 	        
 		try(PDDocument document = Loader.loadPDF(file)){
 			PDPage page = document.getPage(0);
@@ -65,7 +64,6 @@ public class Marker {
 
 	        	contentStream.showText(mark);
 	        	contentStream.endText();
-	        	System.out.println("Mark successfully put on pdf");
 	        		
 	        }
 	        document.save(destFile);
