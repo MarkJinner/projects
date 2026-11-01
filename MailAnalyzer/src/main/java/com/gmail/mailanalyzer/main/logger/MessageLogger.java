@@ -11,29 +11,23 @@ import com.gmail.mailanalyzer.main.observerframe.message.Level;
 import com.gmail.mailanalyzer.main.observerframe.message.Message;
 
 public class MessageLogger implements Logger {
-//	private Logger next;
-//	private Level level = Level.Request;
-//	private Writer writer;
-//	private File file;
-//	private JsonConverter<MessageLogger> converter = new JsonConverter<>();
-//	private Loggers loggers;
-//	private File logs;
-//
 	private static MessageLogger instance = null;
-	private final String logNameField = "messageLogName";
-	private final String folderNameField = "messageFolderName";
+	private final String logNameFieldKey = "messageLogName";
+	private final String folderNameFieldKey = "messageFolderName";
 	private final String propertiesName = "loggers.properties";
-	private final String logMaxLines = "messageLogMaxLines";
+	private final String logMaxLinesKey= "messageLogMaxLines";
 	private LoggerTools tools;
-	private Properties loggerProps = new Properties();
+	private Properties loggerProps;
+	private LoggerTextSaver textSaver;
 	
 	private MessageLogger() throws FileNotFoundException, IOException {
-		File configFile = new File(System.getProperty("user.dir") + File.separator + propertiesName);
-		loggerProps.load(new FileInputStream(configFile));
-		tools = new LoggerTools(Level.Request, loggerProps.getProperty(folderNameField));
+		initProperties();
+		tools = new LoggerTools(Level.Request, loggerProps.getProperty(folderNameFieldKey));
+		textSaver = new LoggerTextSaver(tools,loggerProps, logMaxLinesKey, logNameFieldKey);
 	}
-	
-	
+
+
+
 
 	public static MessageLogger getInstance() throws FileNotFoundException, IOException {
 		if (instance == null) {
@@ -55,6 +49,12 @@ public class MessageLogger implements Logger {
 	@Override
 	public Level getLevel() {
 		return tools.getLevel();
+	}
+	
+	private void initProperties() throws IOException, FileNotFoundException {
+		loggerProps  = new Properties();
+		File configFile = new File(System.getProperty("user.dir") + File.separator + propertiesName);
+		loggerProps.load(new FileInputStream(configFile));
 	}
 
 	@Override
@@ -88,38 +88,10 @@ public class MessageLogger implements Logger {
 
 	}
 
-	private void saveMessage(Message message) throws IOException {
-		if (Loggers.getMainFolder().exists()) {
-			int number = countFilesInFolder();
-			if (number == 0) {
-				setAndCreateNewLogFile(0);		
-			} else if (number > 0) {
-				tools.setLog(getLogFile((number - 1)));
-				if (countLines(tools.getLog()) > Integer.parseInt((String) loggerProps.get(logMaxLines))) {
-					setAndCreateNewLogFile(number);	
-				}
-			}
-			tools.getWriter().setFile(tools.getLog());
-			tools.getWriter().write(tools.getConverter().toJson(message));
-		}
-	}
-	
-	private int countFilesInFolder() {
-		return tools.getScanner().countFiles(tools.getFolder(), loggerProps.getProperty(logNameField));
+	private void saveMessage(Message message) throws IOException {	
+		textSaver.save(message);
 	}
 
-	private File getLogFile(int number) {
-		return new File(tools.getFolder(), loggerProps.getProperty(logNameField) + number);
-	}
-	private void setAndCreateNewLogFile(int number) throws IOException {
-		tools.setLog(getLogFile(number));
-		tools.getLog().createNewFile();
-	}
-
-	private int countLines(File file) throws FileNotFoundException, IOException {
-		return tools.getReader().read(file).size();
-	}
-	
 	public static void main(String [] args) throws FileNotFoundException, IOException {
 		MessageLogger logger = MessageLogger.getInstance();
 	}

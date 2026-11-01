@@ -1,0 +1,6 @@
+{"date":"27 Oct 11:54:24 ","text":"Inbox scanning...","level":"Request"}
+{"date":"27 Oct 11:54:26 ","text":"Inbox scanning...","level":"Request"}
+{"date":"27 Oct 11:54:28 ","text":"Inbox scanning...","level":"Request"}
+{"date":"27 Oct 11:57:40 ","text":"Frame initialized","level":"Request"}
+{"date":"27 Oct 11:57:40 ","text":"Properties loaded successfully","level":"Request"}
+{"date":"27 Oct 11:57:40 ","text":"org.eclipse.angus.mail.util.MailConnectException: Couldn\u0027t connect to host, port: imap.ukr.net, 993; timeout -1;\n  nested exception is:\n\tjava.net.UnknownHostException: imap.ukr.net\norg.eclipse.angus.mail.imap.IMAPStore.protocolConnect(IMAPStore.java:732)\njakarta.mail.Service.connect(Service.java:335)\njakarta.mail.Service.connect(Service.java:220)\ncom.gmail.mailanalyzer.main.mailobserver.InboxScanner.startScanning(InboxScanner.java:72)\ncom.gmail.mailanalyzer.main.mailobserver.InboxScanner.scanInbox(InboxScanner.java:155)\ncom.gmail.mailanalyzer.main.mailobserver.MailObserver.scanEmailInbox(MailObserver.java:33)\ncom.gmail.mailanalyzer.main.Main.main(Main.java:22)","level":"Request"}

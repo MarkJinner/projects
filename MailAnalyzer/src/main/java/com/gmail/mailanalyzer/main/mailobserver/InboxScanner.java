@@ -35,14 +35,12 @@ public class InboxScanner {
 	private ExceptionConverter eConverter;
 
 	public InboxScanner() throws FileNotFoundException, IOException {
-//		props.load(InboxScanner.class.getClassLoader().getResourceAsStream("properties.properties"));
 		String currentDir = System.getProperty("user.dir");
-		File configFile = new File(currentDir+File.separator+"mail_properties.properties"); 
+		File configFile = new File(currentDir + File.separator + "mail_properties.properties");
 		props.load(new FileInputStream(configFile));
-//		props.load(new FileInputStream(new File("")));
-		if (props.stringPropertyNames().size()!=0) {
+		if (props.stringPropertyNames().size() != 0) {
 			frame.appendText("Properties loaded successfully");
-		}else {
+		} else {
 			frame.appendText("Properties load failed");
 		}
 
@@ -63,13 +61,14 @@ public class InboxScanner {
 
 	private void startScanning() throws IOException {
 
+		InboxPartScanner.ScannerDisplay display = null;
 		while (!Thread.currentThread().isInterrupted()) {
 			try {
-				
+
 				Session emailSession = Session.getDefaultInstance(props);
-				
+
 				Store store = emailSession.getStore((String) props.get("protocol"));
-				
+
 				store.connect((String) props.get("imapHost"), (String) props.get("username"),
 						(String) props.get("key"));
 				Folder emailFolder = store.getFolder("INBOX");
@@ -82,7 +81,6 @@ public class InboxScanner {
 				Message[] messages = emailFolder.search(unreadTerm);
 				if (this.inboxLength != messages.length) {
 
-					
 					if (inboxLength == 0) {
 						frame.appendText("Initial inbox scanning started");
 
@@ -90,7 +88,7 @@ public class InboxScanner {
 						frame.appendText("New letter received. Inbox scanning started");
 
 					}
-					InboxPartScanner.ScannerDisplay display = new InboxPartScanner().new ScannerDisplay();
+					display = new InboxPartScanner().new ScannerDisplay();
 
 					inboxLength = messages.length;
 
@@ -128,20 +126,27 @@ public class InboxScanner {
 					display.tr.interrupt();
 					frame.appendText("Email scanning finished: " + messages.length + " unread letters in inbox");
 				} else {
-					frame.appendText("No new email in inbox");
+					if(this.connectionChecker.isConnectionRestored()!=this.connectionChecker.isConnection()) {
+//						System.out.println("YOU CAN RUN scanInbox from here");
+						inboxLength = 0;
+						this.connectionChecker.setConnection(true);
+						startScanning();
+					}else {
+						frame.appendText("No new email in inbox");	
+					}
+					
 				}
 				messages = emailFolder.search(unreadTerm);
 				emailFolder.close(false);
 				store.close();
 
 			} catch (Exception e) {
-				System.err.println("Ошибка при подключении к почте: " + e.getMessage());
+				System.err.println("Email acccess exception " + e.getMessage());
 				frame.appendText(eConverter.convertToString(e));
 				e.printStackTrace();
 			}
-			System.out.println("Inbox scanned successfully...");
 			try {
-				Thread.currentThread().sleep(10000);
+				Thread.currentThread().sleep(30000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				frame.appendText(eConverter.convertToString(e));
@@ -287,19 +292,24 @@ public class InboxScanner {
 
 			private void startCheck() {
 				while (!tr.isInterrupted()) {
-
-					try {
-						frame.appendText("Inbox scanning...");
-						Thread.currentThread().sleep(2000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						break;
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						break;
+					if (InboxScanner.this.connectionChecker.isConnection()) {
+						try {
+							frame.appendText("Inbox scanning...");
+							Thread.currentThread().sleep(2000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							break;
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							break;
+						}
+					}else {
+						System.out.println("DisplayScanner interrupted");
+						this.tr.interrupt();
 					}
+
 				}
 			}
 

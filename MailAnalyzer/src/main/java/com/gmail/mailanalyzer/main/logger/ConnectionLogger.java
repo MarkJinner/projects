@@ -12,12 +12,13 @@ import com.gmail.mailanalyzer.main.observerframe.message.Message;
 
 public class ConnectionLogger implements Logger {
 	private static ConnectionLogger instance = null;
-	private final String logNameField = "connectionLogName";
-	private final String folderNameField = "connectionFolderName";
+	private final String logNameFieldKey = "connectionLogName";
+	private final String folderNameFieldKey = "connectionFolderName";
 	private final String propertiesName = "loggers.properties";
-	private final String logMaxLines = "connectionLogMaxLines";
+	private final String logMaxLinesKey = "connectionLogMaxLines";
 	private LoggerTools tools;
-	private Properties loggerProps = new Properties();
+	private Properties loggerProps;
+	private LoggerTextSaver textSaver;
 
 	public static ConnectionLogger getInstance() throws IOException {
 
@@ -28,9 +29,15 @@ public class ConnectionLogger implements Logger {
 	}
 
 	private ConnectionLogger() throws FileNotFoundException, IOException {
+		initProperties();
+		tools = new LoggerTools(Level.Connection, loggerProps.getProperty(folderNameFieldKey));
+		textSaver = new LoggerTextSaver(tools,loggerProps, logMaxLinesKey, logNameFieldKey);
+	}
+
+	private void initProperties() throws IOException, FileNotFoundException {
+		loggerProps  = new Properties();
 		File configFile = new File(System.getProperty("user.dir") + File.separator + propertiesName);
 		loggerProps.load(new FileInputStream(configFile));
-		tools = new LoggerTools(Level.Connection, loggerProps.getProperty(folderNameField));
 	}
 
 	public static void setInstance(ConnectionLogger instance) {
@@ -75,40 +82,9 @@ public class ConnectionLogger implements Logger {
 
 	private void saveMessage(Message message) throws IOException {
 
-		if (Loggers.getMainFolder().exists()) {
-			int number = countFilesInFolder();
-			if (number == 0) {
-				setAndCreateNewLogFile(0);		
-			} else if (number > 0) {
-				tools.setLog(getLogFile((number - 1)));
-				if (countLines(tools.getLog()) > Integer.parseInt((String) loggerProps.get(logMaxLines))) {
-					setAndCreateNewLogFile(number);	
-				}
-			}
-			tools.getWriter().setFile(tools.getLog());
-			tools.getWriter().write(tools.getConverter().toJson(message));
-		}
+		textSaver.save(message);
 	}
 
-	private int countFilesInFolder() {
-		return tools.getScanner().countFiles(tools.getFolder(), loggerProps.getProperty(logNameField));
-	}
 
-	private File getLogFile(int number) {
-		return new File(tools.getFolder(), loggerProps.getProperty(logNameField) + number);
-	}
-	private void setAndCreateNewLogFile(int number) throws IOException {
-		tools.setLog(getLogFile(number));
-		tools.getLog().createNewFile();
-	}
-
-	private int countLines(File file) throws FileNotFoundException, IOException {
-		return tools.getReader().read(file).size();
-	}
-
-//	public static void main(String[] args) throws IOException {
-//		ConnectionCheckMessageLogger logger = ConnectionCheckMessageLogger.getInstance();
-//		System.out.println(ConnectionCheckMessageLogger.instance.tools);
-//	}
 
 }

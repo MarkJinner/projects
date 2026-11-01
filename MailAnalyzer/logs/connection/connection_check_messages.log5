@@ -1,0 +1,6 @@
+{"date":"28 Oct 12:43:37 ","text":"Email connection successfully checked","level":"Connection"}
+{"date":"28 Oct 12:44:04 ","text":"Email connection successfully checked","level":"Connection"}
+{"date":"28 Oct 12:46:30 ","text":"Email connection successfully checked","level":"Connection"}
+{"date":"28 Oct 12:47:22 ","text":"jakarta.mail.FolderClosedException: Lost folder connection to server\norg.eclipse.angus.mail.imap.IMAPFolder.checkOpened(IMAPFolder.java:491)\norg.eclipse.angus.mail.imap.IMAPFolder.search(IMAPFolder.java:2379)\ncom.gmail.mailanalyzer.main.mailobserver.InboxScanner.startScanning(InboxScanner.java:132)\ncom.gmail.mailanalyzer.main.mailobserver.InboxScanner.scanInbox(InboxScanner.java:156)\ncom.gmail.mailanalyzer.main.mailobserver.MailObserver.scanEmailInbox(MailObserver.java:33)\ncom.gmail.mailanalyzer.main.Main.main(Main.java:22)","level":"Connection"}
+{"date":"28 Oct 12:51:16 ","text":"Email connection successfully checked","level":"Connection"}
+{"date":"28 Oct 12:51:43 ","text":"Email connection successfully checked","level":"Connection"}

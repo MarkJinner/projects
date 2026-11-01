@@ -1,6 +1,7 @@
 package com.gmail.mailanalyzer.main.logger;
 
 import java.io.File;
+import java.util.Properties;
 
 import com.gmail.mailanalyzer.main.jsonconverter.JsonConverter;
 import com.gmail.mailanalyzer.main.observerframe.message.Level;
@@ -11,6 +12,12 @@ public class LoggerTools {
 	private Reader reader;
 	private File folder;
 	private File log;
+	private JsonConverter<Logger> converter;
+	private Loggers loggers;
+	private FolderScanner scanner;
+	private Logger next;
+	private Properties properties;
+	
 	public File getLog() {
 		return log;
 	}
@@ -19,12 +26,36 @@ public class LoggerTools {
 		this.log = log;
 	}
 
-	private JsonConverter<Logger> converter;
-	private Loggers loggers;
-	private FolderScanner scanner;
-	private Logger next;
+
 
 	public LoggerTools(Level level, File writerFile, String loggerFolderName) {
+		this.level = level;
+		this.writer = new Writer(writerFile);
+		this.reader = new Reader();
+		this.loggers = Loggers.getInstance();
+		this.folder = new File(loggers.getMainFolder(), loggerFolderName);
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+		this.converter = new JsonConverter<>();
+		scanner = new FolderScanner();
+	}
+	
+	public LoggerTools(Level level, Properties properties,  String loggerFolderName) {
+		this.properties = properties;
+		this.level = level;
+		this.reader = new Reader();
+		this.loggers = Loggers.getInstance();
+		this.folder = new File(loggers.getMainFolder(), loggerFolderName);
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+		this.converter = new JsonConverter<>();
+		scanner = new FolderScanner();
+	}
+	
+	public LoggerTools(Level level, Properties properties, File writerFile, String loggerFolderName) {
+		this.properties = properties;
 		this.level = level;
 		this.writer = new Writer(writerFile);
 		this.reader = new Reader();

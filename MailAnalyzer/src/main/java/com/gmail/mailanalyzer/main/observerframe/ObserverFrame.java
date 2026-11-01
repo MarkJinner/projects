@@ -31,7 +31,7 @@ public class ObserverFrame {
 	private Message message = null;
 	private Level messageLevel = null;
 	private Map<String, Level> levels = new TreeMap<>(
-			Map.of("connection", Level.Connection, "exception", Level.Exception));
+			Map.of("connection", Level.Connection, "acccess exception", Level.Exception));
 
 	private ObserverFrame() throws IOException {
 		initializeFrame();

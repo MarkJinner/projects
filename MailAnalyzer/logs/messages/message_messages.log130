@@ -1,0 +1,6 @@
+{"date":"01 Nov 12:50:39 ","text":"No new email in inbox","level":"Request"}
+{"date":"01 Nov 12:51:09 ","text":"No new email in inbox","level":"Request"}
+{"date":"01 Nov 09:51:39 ","text":"Frame initialized","level":"Request"}
+{"date":"01 Nov 09:51:40 ","text":"Properties loaded successfully","level":"Request"}
+{"date":"01 Nov 09:51:40 ","text":"Initial inbox scanning started","level":"Request"}
+{"date":"01 Nov 09:52:06 ","text":"Email scanning finished: 725 unread letters in inbox","level":"Request"}
